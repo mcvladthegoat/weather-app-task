@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import cs from 'classnames';
-import styles from './text-area.module.scss';
+import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import cs from "classnames";
+import styles from "./text-area.module.scss";
 
-const TextArea = props => {
+const TextArea = (props) => {
   const { defaultValue, placeholder, onChange, className, error } = props;
   const [value, setValue] = useState(defaultValue);
 
@@ -33,15 +33,15 @@ TextArea.propTypes = {
   placeholder: PropTypes.string,
   onChange: PropTypes.func,
   defaultValue: PropTypes.string,
-  error: PropTypes.string
+  error: PropTypes.string,
 };
 
 TextArea.defaultProps = {
-  className: '',
-  placeholder: '',
+  className: "",
+  placeholder: "",
   onChange: () => {},
-  defaultValue: '',
-  error: ''
+  defaultValue: "",
+  error: "",
 };
 
 export default TextArea;

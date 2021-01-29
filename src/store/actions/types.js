@@ -1,4 +1,4 @@
-import keyMirror from 'key-mirror';
+import keyMirror from "key-mirror";
 
 export default keyMirror({
   FETCH_WEATHER_START: null,

@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import cs from 'classnames';
-import styles from './text-input.module.scss';
+import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import cs from "classnames";
+import styles from "./text-input.module.scss";
 
-const TextInput = props => {
+const TextInput = (props) => {
   const { type, defaultValue, placeholder, onChange, className, error } = props;
   const [value, setValue] = useState(defaultValue);
 
@@ -34,16 +34,16 @@ TextInput.propTypes = {
   onChange: PropTypes.func,
   defaultValue: PropTypes.string,
   error: PropTypes.string,
-  type: PropTypes.string
+  type: PropTypes.string,
 };
 
 TextInput.defaultProps = {
-  className: '',
-  placeholder: '',
+  className: "",
+  placeholder: "",
   onChange: () => {},
-  defaultValue: '',
-  error: '',
-  type: 'text'
+  defaultValue: "",
+  error: "",
+  type: "text",
 };
 
 export default TextInput;

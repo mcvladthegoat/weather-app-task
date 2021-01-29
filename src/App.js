@@ -1,10 +1,10 @@
-import React from 'react';
-import logo from './logo.svg';
-import './styles/index.scss';
-import sassStyles from './test.module.scss';
+import React from "react";
+import logo from "./logo.svg";
+import "./styles/index.scss";
+import sassStyles from "./test.module.scss";
 
 function App() {
-  console.log(sassStyles)
+  console.log(sassStyles);
   return (
     <div className="App">
       <header className="App-header">

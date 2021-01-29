@@ -1,9 +1,9 @@
-import actionTypes from '../actions/types'
+import actionTypes from "../actions/types";
 
 const initialState = {
   weather: {},
   notes: {},
-  loading: false
+  loading: false,
 };
 
 export default (state = initialState, action) => {
