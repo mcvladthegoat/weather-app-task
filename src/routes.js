@@ -1,5 +1,7 @@
 export default {
   homePage: "/",
   detailsPage: "/details",
-  detailsByIdPage: (id) => `${this.detailsPage}/${id}`,
+  detailsByIdPage: function (id) {
+    return `${this.detailsPage}/${id}`;
+  },
 };
