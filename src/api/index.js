@@ -13,7 +13,9 @@ export const fetchCurrentWeather = (query) => (dispatch) => {
     .get(currentWeatherApiUrl(query))
     .then((response) =>
       dispatch({
-        type: actionTypes.FETCH_WEATHER_SUCCESS,
+        type: response.data.success
+          ? actionTypes.FETCH_WEATHER_SUCCESS
+          : actionTypes.FETCH_WEATHER_FAILURE,
         data: response.data,
       })
     )

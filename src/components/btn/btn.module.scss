@@ -7,9 +7,13 @@
     border: none;
     border-radius: 2px;
     color: $white;
-    background-color: $blue;
     font-family: 'Open Sans', sans-serif;
     font-weight: normal;
+    cursor: pointer;
+}
+
+.blue {
+    background-color: $blue;
 }
 
 .red {
