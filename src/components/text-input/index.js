@@ -4,7 +4,15 @@ import cs from "classnames";
 import styles from "./text-input.module.scss";
 
 const TextInput = (props) => {
-  const { type, defaultValue, placeholder, onChange, className, error } = props;
+  const {
+    type,
+    defaultValue,
+    placeholder,
+    onChange,
+    className,
+    error,
+    disabled,
+  } = props;
   const [value, setValue] = useState(defaultValue);
 
   const handleChange = ({ target: { value } }) =>
@@ -17,11 +25,12 @@ const TextInput = (props) => {
   return (
     <div className={styles.wrapper}>
       <input
-        className={cs(styles.textInput, className)}
+        className={cs(styles.input, className)}
         type={type}
         value={value}
         placeholder={placeholder}
         onChange={handleChange}
+        disabled={disabled}
       />
       {error && <span className={styles.error}>{error}</span>}
     </div>
@@ -35,6 +44,7 @@ TextInput.propTypes = {
   defaultValue: PropTypes.string,
   error: PropTypes.string,
   type: PropTypes.string,
+  disabled: PropTypes.bool,
 };
 
 TextInput.defaultProps = {
@@ -44,6 +54,7 @@ TextInput.defaultProps = {
   defaultValue: "",
   error: "",
   type: "text",
+  disabled: false,
 };
 
 export default TextInput;

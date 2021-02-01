@@ -1,0 +1,14 @@
+{
+  "translation": {
+    "key": "hello world",
+    "search": {
+      "btn": "Search",
+      "placeholder": "Type location name"
+    },
+    "pages": {
+      "details": {
+        "title": "Details | Weather app"
+      }
+    }
+  }
+}

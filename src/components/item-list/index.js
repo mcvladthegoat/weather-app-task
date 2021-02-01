@@ -69,4 +69,4 @@ ItemList.defaultProps = {
   onFavoritesBtnClick: () => {},
 };
 
-export default Btn;
+export default ItemList;

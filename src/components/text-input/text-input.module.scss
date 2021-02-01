@@ -4,7 +4,7 @@
   width: 100%;
 }
 
-.text-input {
+.input {
   font-size: 16px;
   font-family: 'Open Sans', sans-serif;
   width: 100%;
@@ -13,6 +13,10 @@
   height: 38px;
   padding-left: 10px;
   box-sizing: border-box;
+
+  &:disabled {
+    background-color: $gray-light;
+  }
 }
 
 .error {

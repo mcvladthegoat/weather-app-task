@@ -13,4 +13,7 @@ export default keyMirror({
   REMOVE_FAVORITE_CITY: null,
 
   REMOVE_DEFAULT_CITY: null,
+
+  RESTORE_LOCAL_STORAGE: null,
+  SET_INITIAL_DATA: null,
 });
