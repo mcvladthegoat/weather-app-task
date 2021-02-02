@@ -1,6 +1,7 @@
 import axios from "axios";
 import { accessKey } from "./config.json";
 import ActionTypes from "../store/actions/types";
+import httpCodes from "./http-codes";
 
 const axiosInstance = axios.create();
 
@@ -8,23 +9,42 @@ const baseApiUrl = "http://api.weatherstack.com/";
 const currentWeatherApiUrl = (query) =>
   `${baseApiUrl}/current?access_key=${accessKey}&query=${query}`;
 
-export const fetchCurrentWeather = (rawQuery) => (dispatch) => {
-  const query = rawQuery.replace(/[^a-zA-Z]+/g, "");
+const defaultParams = {
+  default: false,
+};
+
+export const fetchCurrentWeather = (rawQuery, params = defaultParams) => (
+  dispatch
+) => {
+  const query = rawQuery.replace("&", "");
+
   dispatch({ type: ActionTypes.FETCH_WEATHER_START });
-  axiosInstance
+  return axiosInstance
     .get(currentWeatherApiUrl(query))
     .then((response) => {
-      return dispatch({
-        type: response.data.error
-          ? ActionTypes.FETCH_WEATHER_FAILURE
-          : ActionTypes.FETCH_WEATHER_SUCCESS,
-        data: response.data,
-      });
+      if (response.data.error) {
+        throw Error(response.data.error.code);
+      } else {
+        dispatch({
+          type: ActionTypes.FETCH_WEATHER_SUCCESS,
+          data: {
+            ...response.data,
+            ...params,
+          },
+        });
+        return {
+          lat: response.data.location.lat,
+          lon: response.data.location.lon,
+        };
+      }
     })
-    .catch((error) =>
+    .catch((error) => {
       dispatch({
         type: ActionTypes.FETCH_WEATHER_FAILURE,
-        data: error,
-      })
-    );
+        data: {
+          error: httpCodes(error.message),
+        },
+      });
+      return false;
+    });
 };

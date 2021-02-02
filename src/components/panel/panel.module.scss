@@ -1,7 +1,17 @@
 @import '../../styles/colors';
 
+$light-gray-shadow: 0 1px 2px $black, 0 1px 4px $black, 0 2px 8px $black;
+
 .panel {
-  background-color: $gray-light;
   padding: 16px;
+}
+
+.gray {
+  background-color: $gray-light;
   border-radius: 6px;
+}
+
+.white {
+  background-color: $white;
+  box-shadow: $light-gray-shadow;
 }

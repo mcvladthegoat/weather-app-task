@@ -23,7 +23,7 @@ const App = (props) => {
     } else {
       props.restoreLocalStorage({ weather, notes });
     }
-  }, []);
+  }, []); /* eslint-disable-line react-hooks/exhaustive-deps */
 
   return (
     <main className="app">

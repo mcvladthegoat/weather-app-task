@@ -10,7 +10,7 @@ export default createStore(
   root,
   compose(
     applyMiddleware(thunk),
-    window.devToolsExtension && process.env.NODE_ENV === "development"
+    process.env.NODE_ENV === "development" && window.devToolsExtension
       ? window.__REDUX_DEVTOOLS_EXTENSION__()
       : (f) => f
   )

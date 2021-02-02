@@ -23,9 +23,9 @@ const TextInput = (props) => {
   }, [defaultValue]);
 
   return (
-    <div className={styles.wrapper}>
+    <div className={cs(styles.wrapper, className)}>
       <input
-        className={cs(styles.input, className)}
+        className={styles.input}
         type={type}
         value={value}
         placeholder={placeholder}

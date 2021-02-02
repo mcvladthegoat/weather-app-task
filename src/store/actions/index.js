@@ -10,7 +10,11 @@ export const restoreLocalStorage = (storageData) => (dispatch) => {
 };
 
 export const setInitialData = () => (dispatch) => {
+  const params = {
+    default: true,
+  };
+
   initialData.cities.forEach((cityName) => {
-    fetchCurrentWeather(cityName)(dispatch);
+    fetchCurrentWeather(cityName, params)(dispatch);
   });
 };

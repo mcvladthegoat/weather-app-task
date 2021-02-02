@@ -1,6 +1,5 @@
 {
   "translation": {
-    "key": "hello world",
     "search": {
       "btn": "Search",
       "placeholder": "Type location name"
@@ -8,7 +7,15 @@
     "pages": {
       "details": {
         "title": "Details | Weather app"
+      },
+      "error": {
+        "title": "Error | Weather app"
       }
+    },
+    "errors": {
+      "common": "Check connection and try later.",
+      "api": "Problem with partner service.",
+      "query": "Couldn't find location."
     }
   }
 }

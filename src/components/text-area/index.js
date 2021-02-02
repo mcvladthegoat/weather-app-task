@@ -15,7 +15,7 @@ const TextArea = (props) => {
   }, [defaultValue]);
 
   return (
-    <div className={className}>
+    <div className={cs(styles.wrapper, className)}>
       <textarea
         className={cs(styles.textArea)}
         type="text"

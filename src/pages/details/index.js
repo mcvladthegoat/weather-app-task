@@ -16,18 +16,13 @@ const DetailsPage = (props) => {
       <Helmet>
         <title>{i18next.t("pages.details.title")}</title>
       </Helmet>
-      <Panel>
-        <SearchPanel
-          disabled={props.loading}
-          onSubmit={props.fetchCurrentWeather}
-        />
-      </Panel>
     </>
   );
 };
 
 const mapStateToProps = ({ root }) => ({
   loading: root.loading,
+  error: root.error,
 });
 
 const mapDispatchToProps = (dispatch) =>

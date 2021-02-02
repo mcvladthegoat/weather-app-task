@@ -13,12 +13,14 @@ const Btn = ({ className, colorScheme, onClick, children }) => (
 );
 
 Btn.propTypes = {
+  children: PropTypes.any,
   className: PropTypes.string,
   colorScheme: PropTypes.oneOf(["", "blue", "red", "white"]),
   onClick: PropTypes.func,
 };
 
 Btn.defaultProps = {
+  children: null,
   className: "",
   colorScheme: "",
   onClick: () => {},

@@ -5,6 +5,7 @@ const initialState = {
   weather: {},
   notes: {},
   loading: false,
+  error: null,
 };
 
 export const rootReducer = (state = initialState, action) => {
@@ -23,17 +24,26 @@ export const rootReducer = (state = initialState, action) => {
       }
 
     case ActionTypes.FETCH_WEATHER_START:
-      return { ...state, loading: true };
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
 
     case ActionTypes.FETCH_WEATHER_SUCCESS:
       const res = action.data;
       const locationKey = `${res.location.lat},${res.location.lon}`;
       const lastRes = state.weather[locationKey];
+      const isDefault = lastRes ? lastRes.default : res.default;
+      const isFavorite = lastRes ? lastRes.favorite : false;
       const weather = {
         ...state.weather,
         [locationKey]: {
-          ...res,
-          favorite: lastRes ? lastRes.favorite : false,
+          location: res.location,
+          current: res.current,
+          default: isDefault,
+          favorite: isFavorite,
+          updated_at: +new Date(),
         },
       };
       backupStoreItem("weather", weather);
@@ -42,6 +52,13 @@ export const rootReducer = (state = initialState, action) => {
         ...state,
         weather,
         loading: false,
+      };
+
+    case ActionTypes.FETCH_WEATHER_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.data.error,
       };
     default:
       return state;

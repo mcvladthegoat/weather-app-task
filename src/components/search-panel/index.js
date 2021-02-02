@@ -6,7 +6,7 @@ import TextInput from "../text-input";
 import Btn from "../btn";
 import styles from "./search-panel.module.scss";
 
-const SearchPanel = ({ className, onSubmit, disabled }) => {
+const SearchPanel = ({ className, error, onSubmit, disabled }) => {
   const [value, setValue] = useState("");
 
   const handleChange = (value) => setValue(value);
@@ -19,8 +19,9 @@ const SearchPanel = ({ className, onSubmit, disabled }) => {
         placeholder={i18n.t("search.placeholder")}
         value={value}
         onChange={handleChange}
+        error={error}
       />
-      <Btn colorScheme="blue" onClick={handleSubmit}>
+      <Btn className={styles.btn} colorScheme="blue" onClick={handleSubmit}>
         {i18n.t("search.btn")}
       </Btn>
     </div>
@@ -29,12 +30,14 @@ const SearchPanel = ({ className, onSubmit, disabled }) => {
 
 SearchPanel.propTypes = {
   className: PropTypes.string,
+  error: PropTypes.string,
   onSubmit: PropTypes.func,
   disabled: PropTypes.bool,
 };
 
 SearchPanel.defaultProps = {
   className: "",
+  error: "",
   onSubmit: () => {},
   disabled: false,
 };
