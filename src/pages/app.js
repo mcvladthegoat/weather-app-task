@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import moment from "moment";
 import { i18nextInit } from "../translation";
 import Routes from "../routes";
 import HomePage from "./home";
@@ -13,6 +14,8 @@ import { setInitialData, restoreLocalStorage } from "../store/actions";
 import "../styles/index.scss";
 
 i18nextInit();
+moment.locale("en");
+window.moment = moment;
 
 const App = (props) => {
   useEffect(() => {

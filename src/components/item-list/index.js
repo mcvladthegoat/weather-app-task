@@ -8,8 +8,7 @@ import styles from "./item-list.module.scss";
 
 const ItemList = ({
   onItemClick,
-  onRemoveBtnClick,
-  onFavoritesBtnClick,
+  onRightBtnClick,
   className,
   items,
   title,
@@ -24,20 +23,19 @@ const ItemList = ({
     <div className={cs(styles.wrapper, className)}>
       <div className={styles.heading}>
         <span>{title}</span>
-        <Btn
-          colorScheme={isEditable ? "red" : "white"}
-          onClick={handleEditBtnClick}
-        >
+        <Btn colorScheme="blue" onClick={handleEditBtnClick}>
           {isEditable ? "Finish edit" : "Edit"}
         </Btn>
       </div>
       {items.length > 0 ? (
         items.map((item) => (
           <Item
-            name={item.name}
-            temperature={item.temperature}
+            id={item.id}
+            name={item.location.name}
+            temperature={item.current.temperature}
             type={type}
             onClick={onItemClick}
+            onRightBtnClick={onRightBtnClick}
           />
         ))
       ) : (
@@ -54,8 +52,7 @@ ItemList.propTypes = {
   title: PropTypes.string,
   type: PropTypes.oneOf([ItemTypes.Default, ItemTypes.Favorites]),
   onItemClick: PropTypes.func,
-  onRemoveBtnClick: PropTypes.func,
-  onFavoritesBtnClick: PropTypes.func,
+  onRightBtnClick: PropTypes.func,
 };
 
 ItemList.defaultProps = {
@@ -65,8 +62,7 @@ ItemList.defaultProps = {
   title: "",
   type: ItemTypes.Default,
   onItemClick: () => {},
-  onRemoveBtnClick: () => {},
-  onFavoritesBtnClick: () => {},
+  onRightBtnClick: () => {},
 };
 
 export default ItemList;

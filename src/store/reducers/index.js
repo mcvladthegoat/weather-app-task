@@ -1,3 +1,4 @@
+import moment from "moment";
 import ActionTypes from "../actions/types";
 import { backupStoreItem } from "../../utils";
 
@@ -39,11 +40,12 @@ export const rootReducer = (state = initialState, action) => {
       const weather = {
         ...state.weather,
         [locationKey]: {
+          id: locationKey,
           location: res.location,
           current: res.current,
           default: isDefault,
           favorite: isFavorite,
-          updated_at: +new Date(),
+          updated_at: +moment.utc(),
         },
       };
       backupStoreItem("weather", weather);

@@ -24,6 +24,8 @@ export const fetchCurrentWeather = (rawQuery, params = defaultParams) => (
     .then((response) => {
       if (response.data.error) {
         throw Error(response.data.error.code);
+      } else if (!response.data.location.lat || !response.data.location.lon) {
+        throw Error(601); // for ex. this location hasn't essential data: -81.589569,162.099645
       } else {
         dispatch({
           type: ActionTypes.FETCH_WEATHER_SUCCESS,

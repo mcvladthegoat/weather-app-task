@@ -13,5 +13,12 @@ $light-gray-shadow: 0 1px 2px $black, 0 1px 4px $black, 0 2px 8px $black;
 
 .white {
   background-color: $white;
-  box-shadow: $light-gray-shadow;
+  border: 1px solid $gray-light-2;
+  box-shadow: none;
+  transition: .3s ease-in-out;
+
+  &:hover {
+    box-shadow: 0 0 20px rgba(0,0,0,.12);
+    transition: box-shadow .3s ease-in-out
+  }
 }

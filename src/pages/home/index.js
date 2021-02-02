@@ -6,9 +6,12 @@ import { useHistory } from "react-router-dom";
 import Panel from "../../components/panel";
 import Btn from "../../components/btn";
 import SearchPanel from "../../components/search-panel";
+import ItemList from "../../components/item-list";
+import ItemTypes from "../../components/item-list/item/types";
 
 import { fetchCurrentWeather } from "../../api";
 import Routes from "../../routes";
+
 import styles from "./home.module.scss";
 
 const HomePage = (props) => {
@@ -23,7 +26,7 @@ const HomePage = (props) => {
   };
   return (
     <>
-      <Panel styleScheme="white">
+      <Panel className={styles.wrapper} styleScheme="white">
         <Panel>
           <SearchPanel
             disabled={props.loading}
@@ -31,6 +34,8 @@ const HomePage = (props) => {
             error={props.error}
           />
         </Panel>
+        <ItemList items={props.favorites} noItemsText={"Not found favorites"} />
+        <ItemList items={props.defaults} noItemsText={"Not found defaults"} />
       </Panel>
     </>
   );
@@ -39,6 +44,8 @@ const HomePage = (props) => {
 const mapStateToProps = ({ root }) => ({
   loading: root.loading,
   error: root.error,
+  favorites: Object.values(root.weather).filter((item) => item.favorite),
+  defaults: Object.values(root.weather).filter((item) => item.default),
 });
 
 const mapDispatchToProps = (dispatch) =>

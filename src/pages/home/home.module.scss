@@ -1,0 +1,13 @@
+@import '../../styles/colors';
+@import '../../styles/media';
+
+.wrapper {
+  max-width: 800px;
+  width: 60vw;
+}
+
+@media screen and (max-width: $phone) {
+  .wrapper {
+    width: 80vw;
+  }
+}
