@@ -26,13 +26,13 @@ const DetailsPage = (props) => {
   const notes = props.notes[id];
 
   useEffect(() => {
-    if (!props.weather[id]) {
+    if (!props.weather[id] && props.storageLoaded) {
       props.fetchCurrentWeather(id).then((coords) => {
         const newId = convertCoordsToId(coords);
         setId(newId);
       });
     }
-  }, [props.weather[id]]);
+  }, [props.weather[id], props.storageLoaded]);
 
   const handleAddNote = (note) => {
     props.addNote(id, note);
@@ -95,6 +95,7 @@ const mapStateToProps = ({ root }) => ({
   error: root.error,
   weather: root.weather,
   notes: root.notes,
+  storageLoaded: root.storageLoaded,
 });
 
 const mapDispatchToProps = (dispatch) =>

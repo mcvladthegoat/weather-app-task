@@ -15,7 +15,6 @@ import "../styles/index.scss";
 
 i18nextInit();
 moment.locale("en");
-window.moment = moment;
 
 const App = (props) => {
   useEffect(() => {

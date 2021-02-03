@@ -7,6 +7,7 @@ const initialState = {
   notes: {},
   loading: false,
   error: null,
+  storageLoaded: false,
 };
 
 export const rootReducer = (state = initialState, action) => {
@@ -19,6 +20,7 @@ export const rootReducer = (state = initialState, action) => {
           ...state,
           weather,
           notes,
+          storageLoaded: true,
         };
       } catch (e) {
         return state;
