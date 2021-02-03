@@ -23,7 +23,13 @@
         }
       },
       "details": {
-        "title": "Details | Weather app"
+        "title": "Details | Weather app",
+        "notes": {
+          "add-new": "Save",
+          "placeholder": "You can save new notes here",
+          "edit-btn-alt": "Edit",
+          "list-title": "Notes"
+        }
       },
       "error": {
         "title": "Error | Weather app",

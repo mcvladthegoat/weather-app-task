@@ -5,7 +5,7 @@ import { bindActionCreators } from "redux";
 import { useHistory } from "react-router-dom";
 import Panel from "../../components/panel";
 import Btn from "../../components/btn";
-import SearchPanel from "../../components/search-panel";
+import SearchPanel from "./components/search-panel";
 import ItemList from "../../components/item-list";
 import WeatherItem from "./components/weather-item";
 
@@ -57,6 +57,7 @@ const HomePage = (props) => {
             itemTemplate={<WeatherItem />}
             onItemClick={handleItemClick}
             onClickEditMode={handleDeleteFavoriteItemClick}
+            keyPrefix="favorites"
           />
         </Panel>
         <Panel>
@@ -67,6 +68,7 @@ const HomePage = (props) => {
             itemTemplate={<WeatherItem />}
             onItemClick={handleItemClick}
             onClickEditMode={handleDeleteDefaultItemClick}
+            keyPrefix="defaults"
           />
         </Panel>
       </Panel>

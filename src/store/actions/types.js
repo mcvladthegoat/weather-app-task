@@ -9,8 +9,7 @@ export default keyMirror({
   EDIT_NOTE: null,
   REMOVE_NOTE: null,
 
-  ADD_FAVORITE_CITY: null,
-  REMOVE_FAVORITE_CITY: null,
+  SET_FAVORITE_CITY: null,
 
   REMOVE_DEFAULT_CITY: null,
 

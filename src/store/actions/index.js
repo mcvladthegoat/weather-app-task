@@ -25,14 +25,25 @@ export const removeDefaultCity = (id) => (dispatch) =>
     data: { id },
   });
 
-export const removeFavoriteCity = (id) => (dispatch) =>
-  dispatch({
-    type: ActionTypes.REMOVE_FAVORITE_CITY,
-    data: { id },
-  });
-
 export const clearError = () => (dispatch) => {
   dispatch({
     type: ActionTypes.CLEAR_ERROR,
   });
 };
+
+export const addNote = (id, note) => (dispatch) => {
+  dispatch({
+    type: ActionTypes.ADD_NOTE,
+    data: { id, note },
+  });
+};
+
+export const setFavoriteCity = (id, favorite) => (dispatch) => {
+  dispatch({
+    type: ActionTypes.SET_FAVORITE_CITY,
+    data: { id, favorite },
+  });
+};
+
+export const removeFavoriteCity = (id) => (dispatch) =>
+  setFavoriteCity(id, false)(dispatch);

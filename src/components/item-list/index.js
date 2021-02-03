@@ -13,6 +13,7 @@ const ItemList = ({
   title,
   noItemsText,
   itemTemplate,
+  keyPrefix,
 }) => {
   const [isEditable, setIsEditable] = useState(false);
   const handleEditBtnClick = () => setIsEditable(!isEditable);
@@ -36,6 +37,7 @@ const ItemList = ({
       {items.length > 0 ? (
         items.map((item) =>
           React.cloneElement(itemTemplate, {
+            key: `item-${keyPrefix}-${item.id}`,
             onClick: isEditable ? onClickEditMode : onItemClick,
             data: item,
             isEditable: isEditable,
@@ -56,6 +58,7 @@ ItemList.propTypes = {
   onItemClick: PropTypes.func,
   onClickEditMode: PropTypes.func,
   itemTemplate: PropTypes.element.isRequired,
+  keyPrefix: PropTypes.string.isRequired,
 };
 
 ItemList.defaultProps = {

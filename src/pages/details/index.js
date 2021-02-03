@@ -8,8 +8,11 @@ import Panel from "../../components/panel";
 import Btn from "../../components/btn";
 import Loader from "../../components/loader";
 import CurrentDetails from "./components/current-details";
+import FavoriteBtn from "./components/favorite-btn";
+import Notes from "./components/notes";
 
 import { fetchCurrentWeather } from "../../api";
+import { addNote, setFavoriteCity } from "../../store/actions";
 import Routes from "../../routes";
 import { convertCoordsToId } from "../../utils";
 
@@ -20,6 +23,7 @@ const DetailsPage = (props) => {
   let { id: _id } = useParams();
   const [id, setId] = useState(_id);
   const data = props.weather[id];
+  const notes = props.notes[id];
 
   useEffect(() => {
     if (!props.weather[id]) {
@@ -29,6 +33,14 @@ const DetailsPage = (props) => {
       });
     }
   }, [props.weather[id]]);
+
+  const handleAddNote = (note) => {
+    props.addNote(id, note);
+  };
+
+  const handleFavoriteBtnClick = () => {
+    props.setFavoriteCity(id, !data.favorite);
+  };
 
   return (
     <>
@@ -42,6 +54,11 @@ const DetailsPage = (props) => {
           <Loader />
         ) : (
           <>
+            <FavoriteBtn
+              className={styles.favorite}
+              favorite={data.favorite}
+              onClick={handleFavoriteBtnClick}
+            />
             <div className={styles.header}>
               <div>
                 <img
@@ -64,6 +81,7 @@ const DetailsPage = (props) => {
             </div>
             <div className={styles.body}>
               <CurrentDetails data={data.current} />
+              <Notes data={notes} onAddNote={handleAddNote} />
             </div>
           </>
         )}
@@ -76,9 +94,13 @@ const mapStateToProps = ({ root }) => ({
   loading: root.loading,
   error: root.error,
   weather: root.weather,
+  notes: root.notes,
 });
 
 const mapDispatchToProps = (dispatch) =>
-  bindActionCreators({ fetchCurrentWeather }, dispatch);
+  bindActionCreators(
+    { fetchCurrentWeather, addNote, setFavoriteCity },
+    dispatch
+  );
 
 export default connect(mapStateToProps, mapDispatchToProps)(DetailsPage);

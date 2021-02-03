@@ -67,7 +67,7 @@ export const rootReducer = (state = initialState, action) => {
       const weather = {
         ...state.weather,
         [action.data.id]: {
-          ...state[action.data.id],
+          ...state.weather[action.data.id],
           default: false,
         },
       };
@@ -78,12 +78,13 @@ export const rootReducer = (state = initialState, action) => {
         weather,
       };
     }
-    case ActionTypes.REMOVE_FAVORITE_CITY: {
+    case ActionTypes.SET_FAVORITE_CITY: {
+      const { id: locationId, favorite } = action.data;
       const weather = {
         ...state.weather,
-        [action.data.id]: {
-          ...state[action.data.id],
-          favorite: false,
+        [locationId]: {
+          ...state.weather[locationId],
+          favorite,
         },
       };
       backupStoreItem("weather", weather);
@@ -98,6 +99,27 @@ export const rootReducer = (state = initialState, action) => {
         ...state,
         error: null,
       };
+    case ActionTypes.ADD_NOTE: {
+      const { id: locationId, note: value } = action.data;
+      console.log(locationId, value);
+      const previousNotes = state.notes[locationId] || [];
+      const notes = {
+        ...state.notes,
+        [locationId]: [
+          ...previousNotes,
+          {
+            id: +moment.utc(),
+            value,
+          },
+        ],
+      };
+      backupStoreItem("notes", notes);
+
+      return {
+        ...state,
+        notes,
+      };
+    }
     default:
       return state;
   }

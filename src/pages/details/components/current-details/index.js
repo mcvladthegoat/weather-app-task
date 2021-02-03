@@ -17,7 +17,7 @@ const detailsKeyList = [
 ];
 
 const CurrentDetails = ({ data }) => (
-  <div>
+  <div className={styles.wrapper}>
     {detailsKeyList.map((detailKey) => {
       return data.hasOwnProperty(detailKey) ? (
         <p key={`details-${detailKey}`}>

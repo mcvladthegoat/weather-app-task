@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import cs from "classnames";
 import i18n from "i18next";
-import TextInput from "../text-input";
-import Btn from "../btn";
+import TextInput from "../../../../components/text-input";
+import Btn from "../../../../components/btn";
 import styles from "./search-panel.module.scss";
 
 const SearchPanel = ({ className, error, onSubmit, disabled }) => {
@@ -17,7 +17,6 @@ const SearchPanel = ({ className, error, onSubmit, disabled }) => {
       <TextInput
         disabled={disabled}
         placeholder={i18n.t("search.placeholder")}
-        value={value}
         onChange={handleChange}
         onSubmit={handleSubmit}
         error={error}
