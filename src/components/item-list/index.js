@@ -1,43 +1,46 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import cs from "classnames";
-import ItemTypes from "./item/types";
-import Item from "./item";
+import i18n from "i18next";
 import Btn from "../btn";
 import styles from "./item-list.module.scss";
 
 const ItemList = ({
   onItemClick,
-  onRightBtnClick,
+  onClickEditMode,
   className,
   items,
   title,
-  type,
   noItemsText,
+  itemTemplate,
 }) => {
   const [isEditable, setIsEditable] = useState(false);
-
   const handleEditBtnClick = () => setIsEditable(!isEditable);
+
+  useEffect(() => {
+    if (items.length === 0) {
+      setIsEditable(false);
+    }
+  }, [items]);
 
   return (
     <div className={cs(styles.wrapper, className)}>
       <div className={styles.heading}>
-        <span>{title}</span>
-        <Btn colorScheme="blue" onClick={handleEditBtnClick}>
-          {isEditable ? "Finish edit" : "Edit"}
-        </Btn>
+        <span>{isEditable ? i18n.t("item-list.editing") : title}</span>
+        {items.length > 0 && (
+          <Btn colorScheme="blue" size="sm" onClick={handleEditBtnClick}>
+            {i18n.t(`item-list.edit-btn.${isEditable}`)}
+          </Btn>
+        )}
       </div>
       {items.length > 0 ? (
-        items.map((item) => (
-          <Item
-            id={item.id}
-            name={item.location.name}
-            temperature={item.current.temperature}
-            type={type}
-            onClick={onItemClick}
-            onRightBtnClick={onRightBtnClick}
-          />
-        ))
+        items.map((item) =>
+          React.cloneElement(itemTemplate, {
+            onClick: isEditable ? onClickEditMode : onItemClick,
+            data: item,
+            isEditable: isEditable,
+          })
+        )
       ) : (
         <div className={styles.noItemsText}>{noItemsText}</div>
       )}
@@ -50,9 +53,9 @@ ItemList.propTypes = {
   items: PropTypes.array,
   noItemsText: PropTypes.string,
   title: PropTypes.string,
-  type: PropTypes.oneOf([ItemTypes.Default, ItemTypes.Favorites]),
   onItemClick: PropTypes.func,
-  onRightBtnClick: PropTypes.func,
+  onClickEditMode: PropTypes.func,
+  itemTemplate: PropTypes.element.isRequired,
 };
 
 ItemList.defaultProps = {
@@ -60,9 +63,8 @@ ItemList.defaultProps = {
   items: [],
   noItemsText: "",
   title: "",
-  type: ItemTypes.Default,
   onItemClick: () => {},
-  onRightBtnClick: () => {},
+  onClickEditMode: () => {},
 };
 
 export default ItemList;

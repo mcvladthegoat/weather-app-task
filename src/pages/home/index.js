@@ -1,5 +1,5 @@
 import React from "react";
-import i18next from "i18next";
+import i18n from "i18next";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { useHistory } from "react-router-dom";
@@ -7,23 +7,38 @@ import Panel from "../../components/panel";
 import Btn from "../../components/btn";
 import SearchPanel from "../../components/search-panel";
 import ItemList from "../../components/item-list";
-import ItemTypes from "../../components/item-list/item/types";
+import WeatherItem from "./components/weather-item";
 
+import {
+  clearError,
+  removeDefaultCity,
+  removeFavoriteCity,
+} from "../../store/actions";
 import { fetchCurrentWeather } from "../../api";
 import Routes from "../../routes";
+import { convertCoordsToId } from "../../utils";
 
 import styles from "./home.module.scss";
 
 const HomePage = (props) => {
   const history = useHistory();
+  const goToDetailsPage = (id) => history.push(Routes.detailsByIdPage(id));
 
-  const handleSubmit = (e) => {
-    props.fetchCurrentWeather(e).then((coords) => {
+  const handleSubmit = (value) => {
+    props.fetchCurrentWeather(value).then((coords) => {
       if (coords) {
-        history.push(Routes.detailsByIdPage(`${coords.lat},${coords.lon}`));
+        goToDetailsPage(convertCoordsToId(coords));
       }
     });
   };
+
+  const handleItemClick = (id) => {
+    props.clearError();
+    goToDetailsPage(id);
+  };
+  const handleDeleteDefaultItemClick = (id) => props.removeDefaultCity(id);
+  const handleDeleteFavoriteItemClick = (id) => props.removeFavoriteCity(id);
+
   return (
     <>
       <Panel className={styles.wrapper} styleScheme="white">
@@ -34,8 +49,26 @@ const HomePage = (props) => {
             error={props.error}
           />
         </Panel>
-        <ItemList items={props.favorites} noItemsText={"Not found favorites"} />
-        <ItemList items={props.defaults} noItemsText={"Not found defaults"} />
+        <Panel>
+          <ItemList
+            title={i18n.t("pages.home.favorites.title")}
+            items={props.favorites}
+            noItemsText={i18n.t("pages.home.favorites.no-items")}
+            itemTemplate={<WeatherItem />}
+            onItemClick={handleItemClick}
+            onClickEditMode={handleDeleteFavoriteItemClick}
+          />
+        </Panel>
+        <Panel>
+          <ItemList
+            title={i18n.t("pages.home.defaults.title")}
+            items={props.defaults}
+            noItemsText={i18n.t("pages.home.defaults.no-items")}
+            itemTemplate={<WeatherItem />}
+            onItemClick={handleItemClick}
+            onClickEditMode={handleDeleteDefaultItemClick}
+          />
+        </Panel>
       </Panel>
     </>
   );
@@ -49,6 +82,9 @@ const mapStateToProps = ({ root }) => ({
 });
 
 const mapDispatchToProps = (dispatch) =>
-  bindActionCreators({ fetchCurrentWeather }, dispatch);
+  bindActionCreators(
+    { fetchCurrentWeather, removeDefaultCity, removeFavoriteCity, clearError },
+    dispatch
+  );
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

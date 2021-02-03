@@ -12,13 +12,13 @@ const Panel = ({ className, children, styleScheme }) => (
 Panel.propTypes = {
   className: PropTypes.string,
   children: PropTypes.any,
-  styleScheme: PropTypes.oneOf(["gray", "white"]),
+  styleScheme: PropTypes.oneOf(["", "gray", "white"]),
 };
 
 Panel.defaultProps = {
   className: "",
   children: null,
-  styleScheme: "gray",
+  styleScheme: "",
 };
 
 export default Panel;

@@ -16,4 +16,5 @@ export default keyMirror({
 
   RESTORE_LOCAL_STORAGE: null,
   SET_INITIAL_DATA: null,
+  CLEAR_ERROR: null,
 });

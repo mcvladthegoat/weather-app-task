@@ -4,13 +4,44 @@
       "btn": "Search",
       "placeholder": "Type location name"
     },
+    "item-list": {
+      "editing": "Сlick on an item to delete",
+      "edit-btn": {
+        "true": "Finish editing",
+        "false": "Edit"
+      }
+    },
     "pages": {
+      "home": {
+        "favorites": {
+          "title": "Favorites",
+          "no-items": "No favorites"
+        },
+        "defaults": {
+          "title": "Most populated cities",
+          "no-items": "List is empty"
+        }
+      },
       "details": {
         "title": "Details | Weather app"
       },
       "error": {
-        "title": "Error | Weather app"
+        "title": "Error | Weather app",
+        "header": "Something went wrong.",
+        "link": "Go to home page"
       }
+    },
+    "weather": {
+      "temperature": "{{value}} °C",
+      "feelslike": "Feels like: {{value}} °C",
+      "humidity": "Humidity: {{value}}%",
+      "uv_index": "UV index: {{value}}",
+      "pressure": "Pressure: {{value}} MB",
+      "precip": "Precipitation: {{value}} MM",
+      "wind_speed": "Wind speed: {{value}} km/h",
+      "cloudcover": "Cloud cover level: {{value}}%",
+      "wind_degree": "Wind degree: {{value}}",
+      "wind_dir": "Wind direction: {{value}}"
     },
     "errors": {
       "common": "Check connection and try later.",

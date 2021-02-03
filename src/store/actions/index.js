@@ -18,3 +18,21 @@ export const setInitialData = () => (dispatch) => {
     fetchCurrentWeather(cityName, params)(dispatch);
   });
 };
+
+export const removeDefaultCity = (id) => (dispatch) =>
+  dispatch({
+    type: ActionTypes.REMOVE_DEFAULT_CITY,
+    data: { id },
+  });
+
+export const removeFavoriteCity = (id) => (dispatch) =>
+  dispatch({
+    type: ActionTypes.REMOVE_FAVORITE_CITY,
+    data: { id },
+  });
+
+export const clearError = () => (dispatch) => {
+  dispatch({
+    type: ActionTypes.CLEAR_ERROR,
+  });
+};

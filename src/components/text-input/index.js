@@ -3,12 +3,15 @@ import PropTypes from "prop-types";
 import cs from "classnames";
 import styles from "./text-input.module.scss";
 
+const ENTER_KEY_CODE = "Enter";
+
 const TextInput = (props) => {
   const {
     type,
     defaultValue,
     placeholder,
     onChange,
+    onSubmit,
     className,
     error,
     disabled,
@@ -17,6 +20,12 @@ const TextInput = (props) => {
 
   const handleChange = ({ target: { value } }) =>
     onChange(value) || setValue(value);
+
+  const handleKeyDown = ({ key }) => {
+    if (key === ENTER_KEY_CODE) {
+      onSubmit(value);
+    }
+  };
 
   useEffect(() => {
     setValue(defaultValue);
@@ -30,6 +39,7 @@ const TextInput = (props) => {
         value={value}
         placeholder={placeholder}
         onChange={handleChange}
+        onKeyDown={handleKeyDown}
         disabled={disabled}
       />
       {error && <span className={styles.error}>{error}</span>}
@@ -41,6 +51,7 @@ TextInput.propTypes = {
   className: PropTypes.string,
   placeholder: PropTypes.string,
   onChange: PropTypes.func,
+  onSubmit: PropTypes.func,
   defaultValue: PropTypes.string,
   error: PropTypes.string,
   type: PropTypes.string,
@@ -51,6 +62,7 @@ TextInput.defaultProps = {
   className: "",
   placeholder: "",
   onChange: () => {},
+  onSubmit: () => {},
   defaultValue: "",
   error: "",
   type: "text",

@@ -19,6 +19,7 @@ const SearchPanel = ({ className, error, onSubmit, disabled }) => {
         placeholder={i18n.t("search.placeholder")}
         value={value}
         onChange={handleChange}
+        onSubmit={handleSubmit}
         error={error}
       />
       <Btn className={styles.btn} colorScheme="blue" onClick={handleSubmit}>

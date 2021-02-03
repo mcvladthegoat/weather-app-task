@@ -1,15 +1,18 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import styles from "./error.module.scss";
+import i18n from "i18next";
+import Routes from "../../routes";
 
 const ErrorPage = (props) => {
   return (
-    <div className="App">
+    <>
       <Helmet>
-        <title>Something went wrong | Weather app</title>
+        <title>{i18n.t("pages.error.title")}</title>
       </Helmet>
-      <header className="App-header">ERROR</header>
-    </div>
+      <h2>{i18n.t("pages.error.header")}</h2>
+      <Link to={Routes.homePage}>{i18n.t("pages.error.link")}</Link>
+    </>
   );
 };
 

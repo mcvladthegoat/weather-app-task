@@ -6,3 +6,5 @@ export const backupStoreItem = (key, data) => {
     console.warn(`Error in backupStorageItem: ${key} is invalid`);
   }
 };
+
+export const convertCoordsToId = (coords) => `${coords.lat},${coords.lon}`;

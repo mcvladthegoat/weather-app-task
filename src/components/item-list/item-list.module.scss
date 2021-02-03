@@ -1,3 +1,19 @@
-.wrapper {
+@import '../../styles/colors';
 
+.wrapper {
+}
+
+.heading {
+  font-size: 14px;
+  border-bottom: 1px solid $gray-light;
+  padding: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.noItemsText {
+  text-align: center;
+  padding: 20px 0;
+  font-size: 12px;
 }

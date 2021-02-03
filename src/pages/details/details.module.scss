@@ -1,0 +1,42 @@
+@import '../../styles/colors';
+@import '../../styles/media';
+
+.wrapper {
+  max-width: 800px;
+  width: 60vw;
+  min-height: 60vh;
+  display: flex;
+  flex-flow: column wrap;
+  // justify-content: center;
+}
+
+.header {
+  display: flex;
+  border-bottom: 1px solid $gray-light-2;
+  height: fit-content;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+
+  & div {
+    &:first-child {
+      padding-right: 10px;
+    }
+
+    &:last-child {
+      padding-left: 10px;
+      border-left: 1px solid $gray-light-2;
+    }
+  }
+}
+
+.icon {
+  width: 64px;
+  height: 64px;
+}
+
+@media screen and (max-width: $phone) {
+  .wrapper {
+    width: 80vw;
+  }
+}

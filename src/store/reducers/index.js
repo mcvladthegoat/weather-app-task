@@ -11,7 +11,7 @@ const initialState = {
 
 export const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ActionTypes.RESTORE_LOCAL_STORAGE:
+    case ActionTypes.RESTORE_LOCAL_STORAGE: {
       try {
         const weather = JSON.parse(action.data.weather);
         const notes = JSON.parse(action.data.notes) || {};
@@ -23,21 +23,21 @@ export const rootReducer = (state = initialState, action) => {
       } catch (e) {
         return state;
       }
-
-    case ActionTypes.FETCH_WEATHER_START:
+    }
+    case ActionTypes.FETCH_WEATHER_START: {
       return {
         ...state,
         loading: true,
         error: null,
       };
-
-    case ActionTypes.FETCH_WEATHER_SUCCESS:
+    }
+    case ActionTypes.FETCH_WEATHER_SUCCESS: {
       const res = action.data;
       const locationKey = `${res.location.lat},${res.location.lon}`;
       const lastRes = state.weather[locationKey];
       const isDefault = lastRes ? lastRes.default : res.default;
       const isFavorite = lastRes ? lastRes.favorite : false;
-      const weather = {
+      let weather = {
         ...state.weather,
         [locationKey]: {
           id: locationKey,
@@ -55,12 +55,48 @@ export const rootReducer = (state = initialState, action) => {
         weather,
         loading: false,
       };
-
-    case ActionTypes.FETCH_WEATHER_FAILURE:
+    }
+    case ActionTypes.FETCH_WEATHER_FAILURE: {
       return {
         ...state,
         loading: false,
         error: action.data.error,
+      };
+    }
+    case ActionTypes.REMOVE_DEFAULT_CITY: {
+      const weather = {
+        ...state.weather,
+        [action.data.id]: {
+          ...state[action.data.id],
+          default: false,
+        },
+      };
+      backupStoreItem("weather", weather);
+
+      return {
+        ...state,
+        weather,
+      };
+    }
+    case ActionTypes.REMOVE_FAVORITE_CITY: {
+      const weather = {
+        ...state.weather,
+        [action.data.id]: {
+          ...state[action.data.id],
+          favorite: false,
+        },
+      };
+      backupStoreItem("weather", weather);
+
+      return {
+        ...state,
+        weather,
+      };
+    }
+    case ActionTypes.CLEAR_ERROR:
+      return {
+        ...state,
+        error: null,
       };
     default:
       return state;
