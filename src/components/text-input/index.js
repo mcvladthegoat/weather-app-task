@@ -22,7 +22,7 @@ const TextInput = (props) => {
     onChange(value) || setValue(value);
 
   const handleKeyDown = ({ key }) => {
-    if (key === ENTER_KEY_CODE) {
+    if (key === ENTER_KEY_CODE && !disabled) {
       onSubmit(value);
     }
   };
