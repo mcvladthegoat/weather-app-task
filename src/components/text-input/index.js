@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import cs from "classnames";
+
 import styles from "./text-input.module.scss";
 
 const ENTER_KEY_CODE = "Enter";

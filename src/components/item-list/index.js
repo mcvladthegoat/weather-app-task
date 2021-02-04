@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import cs from "classnames";
 import i18n from "i18next";
 import Btn from "../btn";
+
 import styles from "./item-list.module.scss";
 
 const ItemList = ({
@@ -44,7 +45,7 @@ const ItemList = ({
           })
         )
       ) : (
-        <div className={styles.noItemsText}>{noItemsText}</div>
+        <span className={styles.noItemsText}>{noItemsText}</span>
       )}
     </div>
   );

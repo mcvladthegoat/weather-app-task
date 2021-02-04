@@ -3,7 +3,7 @@
 
 .wrapper {
   position: relative;
-  max-width: 800px;
+  max-width: 500px;
   width: 60vw;
   min-height: 60vh;
   display: flex;
@@ -11,10 +11,24 @@
   // justify-content: center;
 }
 
+.goHome {
+  position: absolute;
+  left: 5px;
+  top: 5px;
+}
+
 .favorite {
   position: absolute;
   right: 5px;
   top: 5px;
+}
+
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: auto;
 }
 
 .header {

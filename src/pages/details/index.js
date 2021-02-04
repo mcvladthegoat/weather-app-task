@@ -3,16 +3,12 @@ import i18n from "i18next";
 import { Helmet } from "react-helmet";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { useParams, useHistory } from "react-router-dom";
-import Panel from "../../components/panel";
-import Btn from "../../components/btn";
-import Loader from "../../components/loader";
-import CurrentDetails from "./components/current-details";
-import FavoriteBtn from "./components/favorite-btn";
-import Notes from "./components/notes";
+import { useParams, useHistory, Link } from "react-router-dom";
+import { Btn, Loader, Panel } from "../../components";
+import { CurrentDetails, FavoriteBtn, NoResults, Notes } from "./components";
 
 import { fetchCurrentWeather } from "../../api";
-import { addNote, setFavoriteCity } from "../../store/actions";
+import { addNote, setFavoriteCity, clearError } from "../../store/actions";
 import Routes from "../../routes";
 import { convertCoordsToId } from "../../utils";
 
@@ -32,11 +28,16 @@ const DetailsPage = (props) => {
         setId(newId);
       });
     }
+    return () => {
+      props.clearError();
+    };
   }, [props.weather[id], props.storageLoaded]);
 
   const handleAddNote = (note) => {
     props.addNote(id, note);
   };
+
+  const handleGoToHomeBtn = () => history.push(Routes.homePage);
 
   const handleFavoriteBtnClick = () => {
     props.setFavoriteCity(id, !data.favorite);
@@ -49,11 +50,19 @@ const DetailsPage = (props) => {
       </Helmet>
       <Panel className={styles.wrapper} styleScheme="white">
         {props.error ? (
-          <h3>{props.error}</h3>
+          <NoResults error={props.error} />
         ) : props.loading || !props.weather[id] ? (
-          <Loader />
+          <Loader className={styles.loader} />
         ) : (
           <>
+            <Btn
+              className={styles.goHome}
+              onClick={handleGoToHomeBtn}
+              size="sm"
+              colorScheme="blue"
+            >
+              {i18n.t("pages.details.go-home")}
+            </Btn>
             <FavoriteBtn
               className={styles.favorite}
               favorite={data.favorite}
@@ -100,7 +109,7 @@ const mapStateToProps = ({ root }) => ({
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
-    { fetchCurrentWeather, addNote, setFavoriteCity },
+    { fetchCurrentWeather, addNote, setFavoriteCity, clearError },
     dispatch
   );
 

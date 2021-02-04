@@ -1,6 +1,6 @@
 import i18n from "i18next";
 
-export default (rawCode) => {
+const httpCodes = (rawCode) => {
   const code = +rawCode;
   if (code >= 101 && code <= 105) {
     return i18n.t("errors.api");
@@ -10,3 +10,5 @@ export default (rawCode) => {
     return i18n.t("errors.common");
   }
 };
+
+export default httpCodes;

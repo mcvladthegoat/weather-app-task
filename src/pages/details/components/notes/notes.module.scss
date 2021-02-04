@@ -1,11 +1,30 @@
+@import '../../../../styles/colors';
+
 .wrapper {
   width: 50%;
 }
 
 .header {
-  
+  margin-bottom: 10px;
+
+  &>span:last-child {
+    padding: 10px 0;
+  }
 }
 
-.list {
-  margin-top: 10px;
+.body {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: flex-end;
+}
+
+.newNoteBtn {
+  margin-top: 4px;
+}
+
+.textArea {
+  & textarea {
+    border: 1px solid $gray-light;
+    font-size: 14px;
+  }
 }

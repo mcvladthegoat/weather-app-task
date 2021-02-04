@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import cs from "classnames";
+
 import styles from "./panel.module.scss";
 
 const Panel = ({ className, children, styleScheme }) => (

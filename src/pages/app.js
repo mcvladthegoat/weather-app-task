@@ -4,10 +4,10 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import moment from "moment";
 import { i18nextInit } from "../translation";
-import Routes from "../routes";
 import HomePage from "./home";
 import DetailsPage from "./details";
 import ErrorPage from "./error";
+import Routes from "../routes";
 import { fetchCurrentWeather } from "../api";
 import { setInitialData, restoreLocalStorage } from "../store/actions";
 

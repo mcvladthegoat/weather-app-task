@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import cs from "classnames";
+
 import styles from "./btn.module.scss";
 
 const Btn = ({ className, colorScheme, size, onClick, children }) => (

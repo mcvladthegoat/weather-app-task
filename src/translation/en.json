@@ -7,7 +7,7 @@
     "item-list": {
       "editing": "Сlick on an item to delete",
       "edit-btn": {
-        "true": "Finish editing",
+        "true": "Finish",
         "false": "Edit"
       }
     },
@@ -24,11 +24,17 @@
       },
       "details": {
         "title": "Details | Weather app",
+        "go-home": "Go to home",
+        "favorite": {
+          "true": "Unfavorite",
+          "false": "Favorite"
+        },
         "notes": {
           "add-new": "Save",
           "placeholder": "You can save new notes here",
           "edit-btn-alt": "Edit",
-          "list-title": "Notes"
+          "list-title": "Notes",
+          "no-items": "There are no notes"
         }
       },
       "error": {

@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import cs from "classnames";
+import i18n from "i18next";
 import Btn from "../../../../components/btn";
 
 const FavoriteBtn = ({ className, favorite, onClick }) => (
@@ -10,7 +10,7 @@ const FavoriteBtn = ({ className, favorite, onClick }) => (
     size="sm"
     onClick={onClick}
   >
-    {favorite ? "Unfavorite" : "Favorite"}
+    {i18n.t(`pages.details.favorite.${favorite}`)}
   </Btn>
 );
 

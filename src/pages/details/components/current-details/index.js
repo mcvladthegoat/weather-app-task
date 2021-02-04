@@ -4,7 +4,7 @@ import i18n from "i18next";
 
 import styles from "./current-details.module.scss";
 
-const detailsKeyList = [
+export const detailsKeyList = [
   "feelslike",
   "humidity",
   "uv_index",
@@ -19,12 +19,12 @@ const detailsKeyList = [
 const CurrentDetails = ({ data }) => (
   <div className={styles.wrapper}>
     {detailsKeyList.map((detailKey) => {
-      return data.hasOwnProperty(detailKey) ? (
-        <p key={`details-${detailKey}`}>
-          {i18n.t(`weather.${detailKey}`, { value: data[detailKey] })}
-        </p>
-      ) : (
-        ""
+      return (
+        data.hasOwnProperty(detailKey) && (
+          <p key={`details-${detailKey}`}>
+            {i18n.t(`weather.${detailKey}`, { value: data[detailKey] })}
+          </p>
+        )
       );
     })}
   </div>

@@ -3,11 +3,8 @@ import i18n from "i18next";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { useHistory } from "react-router-dom";
-import Panel from "../../components/panel";
-import Btn from "../../components/btn";
-import SearchPanel from "./components/search-panel";
-import ItemList from "../../components/item-list";
-import WeatherItem from "./components/weather-item";
+import { Btn, Panel, ItemList } from "../../components";
+import { SearchPanel, WeatherItem } from "./components";
 
 import {
   clearError,
@@ -16,7 +13,7 @@ import {
 } from "../../store/actions";
 import { fetchCurrentWeather } from "../../api";
 import Routes from "../../routes";
-import { convertCoordsToId } from "../../utils";
+import { convertCoordsToId, sortLocationList } from "../../utils";
 
 import styles from "./home.module.scss";
 
@@ -79,8 +76,10 @@ const HomePage = (props) => {
 const mapStateToProps = ({ root }) => ({
   loading: root.loading,
   error: root.error,
-  favorites: Object.values(root.weather).filter((item) => item.favorite),
-  defaults: Object.values(root.weather).filter((item) => item.default),
+  favorites: sortLocationList(root.weather).filter((item) => item.favorite),
+  defaults: sortLocationList(root.weather).filter((item) => item.default),
+  // favorites: Object.values(root.weather).filter((item) => item.favorite),
+  // defaults: Object.values(root.weather).filter((item) => item.default),
 });
 
 const mapDispatchToProps = (dispatch) =>

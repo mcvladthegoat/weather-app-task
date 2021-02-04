@@ -8,3 +8,8 @@ export const backupStoreItem = (key, data) => {
 };
 
 export const convertCoordsToId = (coords) => `${coords.lat},${coords.lon}`;
+
+export const sortLocationList = (list) =>
+  Object.values(list).sort((a, b) =>
+    a.location.name.localeCompare(b.location.name)
+  );

@@ -7,46 +7,46 @@ const axiosInstance = axios.create();
 
 const baseApiUrl = "http://api.weatherstack.com/";
 const currentWeatherApiUrl = (query) =>
-  `${baseApiUrl}/current?access_key=${accessKey}&query=${query}`;
+  `${baseApiUrl}/current?access_key=${
+    accessKey || process.env.API_ACCESS_KEY
+  }&query=${query}`;
 
 const defaultParams = {
   default: false,
 };
 
-export const fetchCurrentWeather = (rawQuery, params = defaultParams) => (
+export const fetchCurrentWeather = (rawQuery, params = defaultParams) => async (
   dispatch
 ) => {
   const query = rawQuery.replace("&", "");
 
   dispatch({ type: ActionTypes.FETCH_WEATHER_START });
-  return axiosInstance
-    .get(currentWeatherApiUrl(query))
-    .then((response) => {
-      if (response.data.error) {
-        throw Error(response.data.error.code);
-      } else if (!response.data.location.lat || !response.data.location.lon) {
-        throw Error(601); // for ex. this location hasn't essential data: -81.589569,162.099645
-      } else {
-        dispatch({
-          type: ActionTypes.FETCH_WEATHER_SUCCESS,
-          data: {
-            ...response.data,
-            ...params,
-          },
-        });
-        return {
-          lat: response.data.location.lat,
-          lon: response.data.location.lon,
-        };
-      }
-    })
-    .catch((error) => {
+  try {
+    const response = await axiosInstance.get(currentWeatherApiUrl(query));
+    if (response.data.error) {
+      throw Error(response.data.error.code);
+    } else if (!response.data.location.lat || !response.data.location.lon) {
+      throw Error(601); // for ex. this location hasn't essential data: -81.589569,162.099645
+    } else {
       dispatch({
-        type: ActionTypes.FETCH_WEATHER_FAILURE,
+        type: ActionTypes.FETCH_WEATHER_SUCCESS,
         data: {
-          error: httpCodes(error.message),
+          ...response.data,
+          ...params,
         },
       });
-      return false;
+      return {
+        lat: response.data.location.lat,
+        lon: response.data.location.lon,
+      };
+    }
+  } catch (error) {
+    dispatch({
+      type: ActionTypes.FETCH_WEATHER_FAILURE,
+      data: {
+        error: httpCodes(error.message),
+      },
     });
+    return false;
+  }
 };
