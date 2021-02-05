@@ -10,11 +10,14 @@ import ErrorPage from "./error";
 import Routes from "../routes";
 import { fetchCurrentWeather } from "../api";
 import { setInitialData, restoreLocalStorage } from "../store/actions";
+import { perlocateWeatherData } from "../store/routines";
 
 import "../styles/index.scss";
 
 i18nextInit();
 moment.locale("en");
+
+const PERLOCATE_TIMER_INTERVAL = 1000 * 60 * 5; // every 5 minutes;
 
 const App = (props) => {
   useEffect(() => {
@@ -25,6 +28,12 @@ const App = (props) => {
     } else {
       props.restoreLocalStorage({ weather, notes });
     }
+    const perlocateTimer = setInterval(
+      () => props.perlocateWeatherData(),
+      PERLOCATE_TIMER_INTERVAL
+    );
+
+    return () => clearInterval(perlocateTimer);
   }, []); /* eslint-disable-line react-hooks/exhaustive-deps */
 
   return (
@@ -44,6 +53,7 @@ const mapDispatchToProps = (dispatch) =>
       fetchCurrentWeather,
       setInitialData,
       restoreLocalStorage,
+      perlocateWeatherData,
     },
     dispatch
   );

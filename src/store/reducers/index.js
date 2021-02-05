@@ -1,6 +1,5 @@
 import moment from "moment";
 import ActionTypes from "../actions/types";
-import { backupStoreItem } from "../../utils";
 
 export const initialState = {
   weather: {},
@@ -54,7 +53,6 @@ export const rootReducer = (state = initialState, action) => {
           updated_at: +moment.utc(),
         },
       };
-      backupStoreItem("weather", weather);
 
       return {
         ...state,
@@ -77,7 +75,6 @@ export const rootReducer = (state = initialState, action) => {
           default: false,
         },
       };
-      backupStoreItem("weather", weather);
 
       return {
         ...state,
@@ -93,7 +90,17 @@ export const rootReducer = (state = initialState, action) => {
           favorite,
         },
       };
-      backupStoreItem("weather", weather);
+
+      return {
+        ...state,
+        weather,
+      };
+    }
+    case ActionTypes.REMOVE_WEATHER_DATA: {
+      const weather = state.weather;
+      action.data.removeQueue.forEach((id) => {
+        delete weather[id];
+      });
 
       return {
         ...state,
@@ -138,7 +145,6 @@ export const rootReducer = (state = initialState, action) => {
           },
         ],
       };
-      backupStoreItem("notes", notes);
 
       return {
         ...state,

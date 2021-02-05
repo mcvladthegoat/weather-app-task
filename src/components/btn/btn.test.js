@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import enzyme from "../../../config/enzyme";
-import Btn from "./index";
+import Btn from "./";
 
 describe("<Btn />", () => {
   test("Btn component renders", () => {
