@@ -3,8 +3,8 @@ import i18n from "i18next";
 import { Helmet } from "react-helmet";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { useParams, useHistory, Link } from "react-router-dom";
-import { Btn, Loader, Panel } from "../../components";
+import { useParams, useHistory } from "react-router-dom";
+import { Btn, Loader, LocationIcon, Panel } from "../../components";
 import { CurrentDetails, FavoriteBtn, NoResults, Notes } from "./components";
 
 import { fetchCurrentWeather } from "../../api";
@@ -63,6 +63,9 @@ const DetailsPage = (props) => {
             >
               {i18n.t("pages.details.go-home")}
             </Btn>
+            {props.userLocationId === id && (
+              <LocationIcon className={styles.locationIcon} size="sm" />
+            )}
             <FavoriteBtn
               className={styles.favorite}
               favorite={data.favorite}
@@ -105,6 +108,7 @@ const mapStateToProps = ({ root }) => ({
   weather: root.weather,
   notes: root.notes,
   storageLoaded: root.storageLoaded,
+  userLocationId: root.userLocation.id,
 });
 
 const mapDispatchToProps = (dispatch) =>

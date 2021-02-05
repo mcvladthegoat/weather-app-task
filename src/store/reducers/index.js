@@ -2,12 +2,16 @@ import moment from "moment";
 import ActionTypes from "../actions/types";
 import { backupStoreItem } from "../../utils";
 
-const initialState = {
+export const initialState = {
   weather: {},
   notes: {},
   loading: false,
   error: null,
   storageLoaded: false,
+  userLocation: {
+    requested: false,
+    id: null,
+  },
 };
 
 export const rootReducer = (state = initialState, action) => {
@@ -101,6 +105,25 @@ export const rootReducer = (state = initialState, action) => {
         ...state,
         error: null,
       };
+    case ActionTypes.REQUEST_USER_LOCATION:
+      return {
+        ...state,
+        userLocation: {
+          ...state.userLocation,
+          requested: true,
+        },
+      };
+    case ActionTypes.SET_USER_LOCATION_ID: {
+      const { id } = action.data;
+
+      return {
+        ...state,
+        userLocation: {
+          ...state.userLocation,
+          id,
+        },
+      };
+    }
     case ActionTypes.ADD_NOTE: {
       const { id: locationId, note: value } = action.data;
       console.log(locationId, value);

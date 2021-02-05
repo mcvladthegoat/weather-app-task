@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import cs from "classnames";
 import i18n from "i18next";
@@ -16,13 +16,13 @@ const SearchPanel = ({ className, error, onSubmit, disabled }) => {
     <div className={cs(styles.wrapper, className)}>
       <TextInput
         disabled={disabled}
-        placeholder={i18n.t("search.placeholder")}
+        placeholder={i18n.t("pages.home.search.placeholder")}
         onChange={handleChange}
         onSubmit={handleSubmit}
         error={error}
       />
       <Btn className={styles.btn} colorScheme="blue" onClick={handleSubmit}>
-        {i18n.t("search.btn")}
+        {i18n.t("pages.home.search.btn")}
       </Btn>
     </div>
   );

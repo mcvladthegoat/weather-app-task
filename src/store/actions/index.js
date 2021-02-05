@@ -2,12 +2,11 @@ import ActionTypes from "./types";
 import initialData from "../initial-data.json";
 import { fetchCurrentWeather } from "../../api";
 
-export const restoreLocalStorage = (storageData) => (dispatch) => {
-  return dispatch({
+export const restoreLocalStorage = (storageData) => (dispatch) =>
+  dispatch({
     type: ActionTypes.RESTORE_LOCAL_STORAGE,
     data: storageData,
   });
-};
 
 export const setInitialData = () => (dispatch) => {
   const params = {
@@ -25,25 +24,33 @@ export const removeDefaultCity = (id) => (dispatch) =>
     data: { id },
   });
 
-export const clearError = () => (dispatch) => {
+export const clearError = () => (dispatch) =>
   dispatch({
     type: ActionTypes.CLEAR_ERROR,
   });
-};
 
-export const addNote = (id, note) => (dispatch) => {
+export const addNote = (id, note) => (dispatch) =>
   dispatch({
     type: ActionTypes.ADD_NOTE,
     data: { id, note },
   });
-};
 
-export const setFavoriteCity = (id, favorite) => (dispatch) => {
+export const setFavoriteCity = (id, favorite) => (dispatch) =>
   dispatch({
     type: ActionTypes.SET_FAVORITE_CITY,
     data: { id, favorite },
   });
-};
 
 export const removeFavoriteCity = (id) => (dispatch) =>
   setFavoriteCity(id, false)(dispatch);
+
+export const requestUserLocation = () => (dispatch) =>
+  dispatch({
+    type: ActionTypes.REQUEST_USER_LOCATION,
+  });
+
+export const setUserLocationId = (id) => (dispatch) =>
+  dispatch({
+    type: ActionTypes.SET_USER_LOCATION_ID,
+    data: { id },
+  });

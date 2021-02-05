@@ -1,9 +1,5 @@
 {
   "translation": {
-    "search": {
-      "btn": "Search",
-      "placeholder": "Type location name"
-    },
     "item-list": {
       "editing": "Сlick on an item to delete",
       "edit-btn": {
@@ -13,6 +9,10 @@
     },
     "pages": {
       "home": {
+        "search": {
+          "btn": "Search",
+          "placeholder": "Type name, coordinates or IP address"
+        },
         "favorites": {
           "title": "Favorites",
           "no-items": "No favorites"

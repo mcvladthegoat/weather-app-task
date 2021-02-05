@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import i18n from "i18next";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { useHistory } from "react-router-dom";
-import { Btn, Panel, ItemList } from "../../components";
+import { Panel, ItemList } from "../../components";
 import { SearchPanel, WeatherItem } from "./components";
 
 import {
   clearError,
   removeDefaultCity,
   removeFavoriteCity,
+  requestUserLocation,
+  setUserLocationId,
 } from "../../store/actions";
 import { fetchCurrentWeather } from "../../api";
 import Routes from "../../routes";
@@ -20,6 +22,30 @@ import styles from "./home.module.scss";
 const HomePage = (props) => {
   const history = useHistory();
   const goToDetailsPage = (id) => history.push(Routes.detailsByIdPage(id));
+
+  const handleLocationSearch = (rawCoords, cb) => {
+    props.fetchCurrentWeather(rawCoords).then((newCoords) => {
+      if (newCoords) {
+        const coords = convertCoordsToId(newCoords);
+        cb(coords);
+        goToDetailsPage(coords);
+      }
+    });
+  };
+
+  useEffect(() => {
+    if (navigator.geolocation && !props.userLocation.requested) {
+      props.requestUserLocation();
+      navigator.geolocation.getCurrentPosition(
+        ({ coords: { latitude: lat, longitude: lon } }) => {
+          handleLocationSearch(
+            convertCoordsToId({ lat, lon }),
+            props.setUserLocationId
+          );
+        }
+      );
+    }
+  }, [props.userLocation]);
 
   const handleSubmit = (value) => {
     props.fetchCurrentWeather(value).then((coords) => {
@@ -78,13 +104,19 @@ const mapStateToProps = ({ root }) => ({
   error: root.error,
   favorites: sortLocationList(root.weather).filter((item) => item.favorite),
   defaults: sortLocationList(root.weather).filter((item) => item.default),
-  // favorites: Object.values(root.weather).filter((item) => item.favorite),
-  // defaults: Object.values(root.weather).filter((item) => item.default),
+  userLocation: root.userLocation,
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
-    { fetchCurrentWeather, removeDefaultCity, removeFavoriteCity, clearError },
+    {
+      fetchCurrentWeather,
+      removeDefaultCity,
+      removeFavoriteCity,
+      clearError,
+      requestUserLocation,
+      setUserLocationId,
+    },
     dispatch
   );
 

@@ -8,7 +8,6 @@
   min-height: 60vh;
   display: flex;
   flex-flow: column wrap;
-  // justify-content: center;
 }
 
 .goHome {
@@ -21,6 +20,13 @@
   position: absolute;
   right: 5px;
   top: 5px;
+}
+
+.locationIcon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  top: 12px;
 }
 
 .loader {
@@ -64,5 +70,13 @@
 @media screen and (max-width: $phone) {
   .wrapper {
     width: 80vw;
+  }
+}
+
+@media screen and (max-width: $phone-sm) {
+  .body {
+    justify-content: center;
+    flex-flow: row wrap;
+    text-align: center;
   }
 }

@@ -18,6 +18,9 @@ const ItemList = ({
 }) => {
   const [isEditable, setIsEditable] = useState(false);
   const handleEditBtnClick = () => setIsEditable(!isEditable);
+  const handleItemClick = (id) => {
+    isEditable ? onClickEditMode(id) : onItemClick(id);
+  };
 
   useEffect(() => {
     if (items.length === 0) {
@@ -39,7 +42,7 @@ const ItemList = ({
         items.map((item) =>
           React.cloneElement(itemTemplate, {
             key: `item-${keyPrefix}-${item.id}`,
-            onClick: isEditable ? onClickEditMode : onItemClick,
+            onClick: handleItemClick,
             data: item,
             isEditable: isEditable,
           })

@@ -5,7 +5,7 @@ import i18n from "i18next";
 
 import styles from "./weather-item.module.scss";
 
-const WeatherItem = ({ onClick, data, isEditable }) => {
+const WeatherItem = ({ onClick, data }) => {
   const handleItemClick = () => onClick(data.id);
 
   return (
@@ -28,13 +28,11 @@ const WeatherItem = ({ onClick, data, isEditable }) => {
 WeatherItem.propTypes = {
   data: PropTypes.any,
   onClick: PropTypes.func,
-  isEditable: PropTypes.bool,
 };
 
 WeatherItem.defaultProps = {
   data: {},
   onClick: () => {},
-  isEditable: false,
 };
 
 export default WeatherItem;
