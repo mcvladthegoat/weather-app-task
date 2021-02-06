@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import i18n from "i18next";
 import { Btn, ItemList, Panel, TextArea } from "../../../../components";
@@ -6,9 +6,9 @@ import NoteItem from "./note-item";
 
 import styles from "./notes.module.scss";
 
-const Notes = ({ data, onAddNote }) => {
+const Notes = ({ data, onAddNote, onRemoveNote, onEditNote }) => {
   const [newNoteValue, setNewNoteValue] = useState("");
-  // const []
+
   const handleSubmitNewNote = () => {
     const value = newNoteValue.trim();
     if (value.length > 0) {
@@ -24,6 +24,8 @@ const Notes = ({ data, onAddNote }) => {
         title={i18n.t("pages.details.notes.list-title")}
         items={data}
         itemTemplate={<NoteItem />}
+        onClickEditMode={onRemoveNote}
+        onSaveNewItemValue={onEditNote}
         noItemsText={i18n.t("pages.details.notes.no-items")}
         keyPrefix="notes"
       />
@@ -50,11 +52,15 @@ const Notes = ({ data, onAddNote }) => {
 Notes.propTypes = {
   data: PropTypes.array,
   onAddNote: PropTypes.func,
+  onEditNote: PropTypes.func,
+  onRemoveNote: PropTypes.func,
 };
 
 Notes.defaultProps = {
   data: [],
   onAddNote: () => {},
+  onEditNote: () => {},
+  onRemoveNote: () => {},
 };
 
 export default Notes;

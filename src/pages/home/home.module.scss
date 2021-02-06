@@ -6,6 +6,11 @@
   width: 60vw;
 }
 
+.searchWrapper {
+  height: 86px;
+  box-sizing: border-box;
+}
+
 @media screen and (max-width: $phone) {
   .wrapper {
     width: 80vw;

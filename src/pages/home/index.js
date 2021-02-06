@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import i18n from "i18next";
+import { Helmet } from "react-helmet";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { useHistory } from "react-router-dom";
-import { Panel, ItemList } from "../../components";
+import { LocationIcon, Panel, ItemList } from "../../components";
 import { SearchPanel, WeatherItem } from "./components";
 
 import {
@@ -35,42 +36,51 @@ const HomePage = (props) => {
 
   useEffect(() => {
     if (navigator.geolocation && !props.userLocation.requested) {
-      props.requestUserLocation();
       navigator.geolocation.getCurrentPosition(
         ({ coords: { latitude: lat, longitude: lon } }) => {
+          props.requestUserLocation();
           handleLocationSearch(
             convertCoordsToId({ lat, lon }),
             props.setUserLocationId
           );
-        }
+        },
+        () => props.requestUserLocation()
       );
     }
-  }, [props.userLocation]);
+  }, [props.userLocation]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleSubmit = (value) => {
-    props.fetchCurrentWeather(value).then((coords) => {
-      if (coords) {
-        goToDetailsPage(convertCoordsToId(coords));
-      }
-    });
+    if (value.trim().length > 0) {
+      props.fetchCurrentWeather(value).then((coords) => {
+        if (coords) {
+          goToDetailsPage(convertCoordsToId(coords));
+        }
+      });
+    }
   };
 
   const handleItemClick = (id) => {
-    props.clearError();
-    goToDetailsPage(id);
+    if (!props.loading && props.userLocation.requested) {
+      props.clearError();
+      goToDetailsPage(id);
+    }
   };
   const handleDeleteDefaultItemClick = (id) => props.removeDefaultCity(id);
   const handleDeleteFavoriteItemClick = (id) => props.removeFavoriteCity(id);
 
   return (
     <>
+      <Helmet>
+        <title>{i18n.t("pages.home.title")}</title>
+      </Helmet>
       <Panel className={styles.wrapper} styleScheme="white">
-        <Panel>
+        <Panel className={styles.searchWrapper}>
           <SearchPanel
             disabled={props.loading}
             onSubmit={handleSubmit}
             error={props.error}
           />
+          {!props.userLocation.requested && <LocationIcon fading withLabel />}
         </Panel>
         <Panel>
           <ItemList

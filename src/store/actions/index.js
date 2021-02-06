@@ -29,10 +29,22 @@ export const clearError = () => (dispatch) =>
     type: ActionTypes.CLEAR_ERROR,
   });
 
-export const addNote = (id, note) => (dispatch) =>
+export const addNote = (id, value) => (dispatch) =>
   dispatch({
     type: ActionTypes.ADD_NOTE,
-    data: { id, note },
+    data: { id, value },
+  });
+
+export const editNote = (id, noteId, value) => (dispatch) =>
+  dispatch({
+    type: ActionTypes.EDIT_NOTE,
+    data: { id, noteId, value },
+  });
+
+export const removeNote = (id, noteId) => (dispatch) =>
+  dispatch({
+    type: ActionTypes.REMOVE_NOTE,
+    data: { id, noteId },
   });
 
 export const setFavoriteCity = (id, favorite) => (dispatch) =>

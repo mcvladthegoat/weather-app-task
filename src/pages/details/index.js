@@ -8,7 +8,13 @@ import { Btn, Loader, LocationIcon, Panel } from "../../components";
 import { CurrentDetails, FavoriteBtn, NoResults, Notes } from "./components";
 
 import { fetchCurrentWeather } from "../../api";
-import { addNote, setFavoriteCity, clearError } from "../../store/actions";
+import {
+  addNote,
+  editNote,
+  removeNote,
+  setFavoriteCity,
+  clearError,
+} from "../../store/actions";
 import Routes from "../../routes";
 import { convertCoordsToId } from "../../utils";
 
@@ -28,13 +34,22 @@ const DetailsPage = (props) => {
         setId(newId);
       });
     }
-    return () => {
-      props.clearError();
-    };
   }, [props.weather[id], props.storageLoaded]);
+
+  useEffect(() => {
+    return () => props.clearError();
+  }, []); /* eslint-disable-line react-hooks/exhaustive-deps */
 
   const handleAddNote = (note) => {
     props.addNote(id, note);
+  };
+
+  const handleEditNote = (noteId, value) => {
+    props.editNote(id, noteId, value);
+  };
+
+  const handleRemoveNote = (noteId) => {
+    props.removeNote(id, noteId);
   };
 
   const handleGoToHomeBtn = () => history.push(Routes.homePage);
@@ -93,7 +108,12 @@ const DetailsPage = (props) => {
             </div>
             <div className={styles.body}>
               <CurrentDetails data={data.current} />
-              <Notes data={notes} onAddNote={handleAddNote} />
+              <Notes
+                data={notes}
+                onAddNote={handleAddNote}
+                onEditNote={handleEditNote}
+                onRemoveNote={handleRemoveNote}
+              />
             </div>
           </>
         )}
@@ -113,7 +133,14 @@ const mapStateToProps = ({ root }) => ({
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
-    { fetchCurrentWeather, addNote, setFavoriteCity, clearError },
+    {
+      fetchCurrentWeather,
+      addNote,
+      editNote,
+      removeNote,
+      setFavoriteCity,
+      clearError,
+    },
     dispatch
   );
 

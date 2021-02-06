@@ -9,6 +9,7 @@ import styles from "./item-list.module.scss";
 const ItemList = ({
   onItemClick,
   onClickEditMode,
+  onSaveNewItemValue,
   className,
   items,
   title,
@@ -20,6 +21,9 @@ const ItemList = ({
   const handleEditBtnClick = () => setIsEditable(!isEditable);
   const handleItemClick = (id) => {
     isEditable ? onClickEditMode(id) : onItemClick(id);
+  };
+  const handleSaveNewItemValue = (id, value) => {
+    onSaveNewItemValue(id, value);
   };
 
   useEffect(() => {
@@ -43,6 +47,7 @@ const ItemList = ({
           React.cloneElement(itemTemplate, {
             key: `item-${keyPrefix}-${item.id}`,
             onClick: handleItemClick,
+            onSaveNewValue: handleSaveNewItemValue,
             data: item,
             isEditable: isEditable,
           })
@@ -61,6 +66,7 @@ ItemList.propTypes = {
   title: PropTypes.string,
   onItemClick: PropTypes.func,
   onClickEditMode: PropTypes.func,
+  onSaveNewItemValue: PropTypes.func,
   itemTemplate: PropTypes.element.isRequired,
   keyPrefix: PropTypes.string.isRequired,
 };
@@ -72,6 +78,7 @@ ItemList.defaultProps = {
   title: "",
   onItemClick: () => {},
   onClickEditMode: () => {},
+  onSaveNewItemValue: () => {},
 };
 
 export default ItemList;

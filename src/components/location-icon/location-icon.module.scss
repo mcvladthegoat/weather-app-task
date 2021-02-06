@@ -1,3 +1,29 @@
+$duration: 1s;
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.wrapper {
+  font-size: 12px;
+}
+
+.fading {
+  animation: fadeInOut infinite ease $duration;
+  -webkit-animation: fadeInOut infinite ease $duration;
+  -moz-animation: fadeInOut infinite ease $duration;
+  -o-animation: fadeInOut infinite ease $duration;
+  -ms-animation: fadeInOut infinite ease $duration;
+}
+
 .sm {
   width: 10px;
   height: auto;

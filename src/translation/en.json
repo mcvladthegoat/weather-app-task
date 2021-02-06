@@ -7,8 +7,13 @@
         "false": "Edit"
       }
     },
+    "location-icon": {
+      "alt": "Your location",
+      "label": "Finding location"
+    },
     "pages": {
       "home": {
+        "title": "Weather app",
         "search": {
           "btn": "Search",
           "placeholder": "Type name, coordinates or IP address"

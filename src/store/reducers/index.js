@@ -132,8 +132,7 @@ export const rootReducer = (state = initialState, action) => {
       };
     }
     case ActionTypes.ADD_NOTE: {
-      const { id: locationId, note: value } = action.data;
-      console.log(locationId, value);
+      const { id: locationId, value } = action.data;
       const previousNotes = state.notes[locationId] || [];
       const notes = {
         ...state.notes,
@@ -141,9 +140,45 @@ export const rootReducer = (state = initialState, action) => {
           ...previousNotes,
           {
             id: +moment.utc(),
-            value,
+            value: value.toString(),
           },
         ],
+      };
+
+      return {
+        ...state,
+        notes,
+      };
+    }
+    case ActionTypes.EDIT_NOTE: {
+      const { id: locationId, noteId, value } = action.data;
+      const locationNotes = state.notes[locationId];
+      const editingNoteIndex = locationNotes.findIndex(
+        (note) => note.id === +noteId
+      );
+      locationNotes[editingNoteIndex].value = value.toString();
+
+      const notes = {
+        ...state.notes,
+        [locationId]: [...locationNotes],
+      };
+
+      return {
+        ...state,
+        notes,
+      };
+    }
+    case ActionTypes.REMOVE_NOTE: {
+      const { id: locationId, noteId } = action.data;
+      const locationNotes = state.notes[locationId];
+      const editingNoteIndex = locationNotes.findIndex(
+        (note) => note.id === +noteId
+      );
+      locationNotes.splice(editingNoteIndex, 1);
+
+      const notes = {
+        ...state.notes,
+        [locationId]: [...locationNotes],
       };
 
       return {

@@ -1,33 +1,77 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import cs from "classnames";
 import i18n from "i18next";
+import { TextArea } from "../../../../../components";
 
-import icon from "./icon.svg";
+import editIcon from "./edit.svg";
+import cancelIcon from "./cancel.svg";
+import submitIcon from "./submit.svg";
+
 import styles from "./note-item.module.scss";
 
-const NoteItem = ({ onClick, data, isEditable }) => {
-  const handleItemClick = () => onClick(data.created_at);
+const NoteItem = ({
+  onClick,
+  onSaveNewValue,
+  data: { value, id },
+  isEditable: isListEditable,
+}) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [newValue, setNewValue] = useState(value);
+
+  const handleItemClick = () => {
+    if (isListEditable) {
+      onClick(id);
+    }
+  };
+  const handleEditCancelIconClick = () => setIsEditing(!isEditing);
+  const handleSubmitIconClick = () => {
+    const value = newValue.trim();
+    if (value.length > 0) {
+      onSaveNewValue(id, value);
+      setIsEditing(false);
+    }
+  };
+
+  useEffect(() => {
+    setIsEditing(false);
+    setNewValue(value);
+  }, [isListEditable, value]);
 
   return (
     <div className={cs(styles.item)} onClick={handleItemClick}>
-      <div className={styles.left}>{data.value}</div>
-      <div className={styles.right}>
-        {!isEditable && (
-          <img
-            src={icon}
-            className={styles.icon}
-            alt={i18n.t("pages.details.notes.edit-btn-alt")}
-          />
+      <div className={styles.left}>
+        {!isEditing ? (
+          value
+        ) : (
+          <TextArea value={newValue} onChange={setNewValue} />
         )}
-        {/* <span>
-          {i18n.t("weather.temperature", { value: data.current.temperature })}
-        </span>
-        <img
-          className={styles.icon}
-          alt={data.current.weather_descriptions[0]}
-          src={data.current.weather_icons[0]}
-        /> */}
+      </div>
+      <div className={styles.right}>
+        {!isListEditable &&
+          (isEditing ? (
+            <>
+              <img
+                src={submitIcon}
+                className={styles.icon}
+                onClick={handleSubmitIconClick}
+                alt={i18n.t("pages.details.notes.edit-btn-alt")}
+              />
+              <img
+                src={cancelIcon}
+                className={styles.icon}
+                onClick={handleEditCancelIconClick}
+                alt={i18n.t("pages.details.notes.edit-btn-alt")}
+              />
+            </>
+          ) : (
+            <img
+              src={editIcon}
+              className={styles.icon}
+              onClick={handleEditCancelIconClick}
+              alt={i18n.t("pages.details.notes.edit-btn-alt")}
+            />
+          ))}
       </div>
     </div>
   );
@@ -36,12 +80,14 @@ const NoteItem = ({ onClick, data, isEditable }) => {
 NoteItem.propTypes = {
   data: PropTypes.any,
   onClick: PropTypes.func,
+  onSaveNewItemValue: PropTypes.func,
   isEditable: PropTypes.bool,
 };
 
 NoteItem.defaultProps = {
   data: {},
   onClick: () => {},
+  onSaveNewItemValue: () => {},
   isEditable: false,
 };
 
