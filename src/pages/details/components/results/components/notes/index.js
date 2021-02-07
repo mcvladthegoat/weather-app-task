@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import i18n from "i18next";
-import { Btn, ItemList, Panel, TextArea } from "../../../../components";
+import { Btn, ItemList, Panel, TextArea } from "../../../../../../components";
 import NoteItem from "./note-item";
 
 import styles from "./notes.module.scss";

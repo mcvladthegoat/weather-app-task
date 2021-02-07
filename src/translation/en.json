@@ -25,7 +25,9 @@
         "defaults": {
           "title": "Most populated cities",
           "no-items": "List is empty"
-        }
+        },
+        "reset-data-link": "Reset all data and reload",
+        "loading": "Loading..."
       },
       "details": {
         "title": "Details | Weather app",

@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import PropTypes from "prop-types";
 import i18n from "i18next";
 import { Helmet } from "react-helmet";
 import { connect } from "react-redux";
@@ -13,6 +14,7 @@ import {
   removeFavoriteCity,
   requestUserLocation,
   setUserLocationId,
+  setInitialData,
 } from "../../store/actions";
 import { fetchCurrentWeather } from "../../api";
 import Routes from "../../routes";
@@ -68,6 +70,12 @@ const HomePage = (props) => {
   const handleDeleteDefaultItemClick = (id) => props.removeDefaultCity(id);
   const handleDeleteFavoriteItemClick = (id) => props.removeFavoriteCity(id);
 
+  const handleResetClick = () => {
+    localStorage.removeItem("weather");
+    localStorage.removeItem("notes");
+    window.location.reload();
+  };
+
   return (
     <>
       <Helmet>
@@ -81,6 +89,11 @@ const HomePage = (props) => {
             error={props.error}
           />
           {!props.userLocation.requested && <LocationIcon fading withLabel />}
+          {props.loading && (
+            <span className={styles.loading}>
+              {i18n.t("pages.home.loading")}
+            </span>
+          )}
         </Panel>
         <Panel>
           <ItemList
@@ -104,6 +117,11 @@ const HomePage = (props) => {
             keyPrefix="defaults"
           />
         </Panel>
+        <Panel>
+          <a className={styles.resetLink} onClick={handleResetClick}>
+            {i18n.t("pages.home.reset-data-link")}
+          </a>
+        </Panel>
       </Panel>
     </>
   );
@@ -126,8 +144,32 @@ const mapDispatchToProps = (dispatch) =>
       clearError,
       requestUserLocation,
       setUserLocationId,
+      setInitialData,
     },
     dispatch
   );
+
+HomePage.propTypes = {
+  defaults: PropTypes.array.isRequired,
+  favorites: PropTypes.array.isRequired,
+  userLocation: PropTypes.shape({
+    requested: PropTypes.bool,
+    id: PropTypes.string,
+  }).isRequired,
+  error: PropTypes.any,
+  loading: PropTypes.bool,
+  fetchCurrentWeather: PropTypes.func.isRequired,
+  removeDefaultCity: PropTypes.func.isRequired,
+  removeFavoriteCity: PropTypes.func.isRequired,
+  clearError: PropTypes.func.isRequired,
+  requestUserLocation: PropTypes.func.isRequired,
+  setUserLocationId: PropTypes.func.isRequired,
+  setInitialData: PropTypes.func.isRequired,
+};
+
+HomePage.defaultProps = {
+  error: null,
+  loading: false,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

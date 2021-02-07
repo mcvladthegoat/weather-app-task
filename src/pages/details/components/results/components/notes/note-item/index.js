@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import cs from "classnames";
 import i18n from "i18next";
-import { TextArea } from "../../../../../components";
+import { TextArea } from "../../../../../../../components";
 
 import editIcon from "./edit.svg";
 import cancelIcon from "./cancel.svg";

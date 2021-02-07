@@ -93,7 +93,8 @@
     "@wojtekmaj/enzyme-adapter-react-17": "^0.4.1",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
-    "redux-devtools-extension": "^2.13.8"
+    "redux-devtools-extension": "^2.13.8",
+    "redux-mock-store": "^1.5.4"
   },
   "scripts": {
     "prepare": "test ! -f src/api/config.json && cp -rf src/api/config.example.json src/api/config.json &2>/dev/null",

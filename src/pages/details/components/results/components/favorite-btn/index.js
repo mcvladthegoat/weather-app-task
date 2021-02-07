@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import i18n from "i18next";
-import Btn from "../../../../components/btn";
+import Btn from "../../../../../../components/btn";
 
 const FavoriteBtn = ({ className, favorite, onClick }) => (
   <Btn

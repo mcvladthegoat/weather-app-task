@@ -11,6 +11,19 @@
   box-sizing: border-box;
 }
 
+.loading {
+  font-size: 12px;
+}
+
+.resetLink {
+  cursor: pointer;
+  font-size: 12px;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 @media screen and (max-width: $phone) {
   .wrapper {
     width: 80vw;

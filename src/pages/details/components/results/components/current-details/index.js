@@ -7,11 +7,11 @@ import styles from "./current-details.module.scss";
 export const detailsKeyList = [
   "feelslike",
   "humidity",
-  "uv_index",
   "pressure",
   "precip",
-  "wind_speed",
   "cloudcover",
+  "uv_index",
+  "wind_speed",
   "wind_degree",
   "wind_dir",
 ];

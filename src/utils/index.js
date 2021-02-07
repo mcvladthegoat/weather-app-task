@@ -7,7 +7,7 @@ export const backupStoreItem = (key, data) => {
   }
 };
 
-export const convertCoordsToId = (coords) => `${coords.lat},${coords.lon}`;
+export const convertCoordsToId = ({ lat = 0, lon = 0 }) => `${lat},${lon}`;
 
 export const sortLocationList = (list) =>
   Object.values(list).sort((a, b) =>
