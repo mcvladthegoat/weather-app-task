@@ -4,13 +4,13 @@ import enzyme from "../../../config/enzyme";
 import Btn from "./";
 
 describe("<Btn />", () => {
-  test("Btn component renders", () => {
+  it("Btn component renders", () => {
     render(<Btn>inner text</Btn>);
     const linkElement = screen.getByText(/inner text/i);
     expect(linkElement).toBeInTheDocument();
   });
 
-  test("Btn component click event", () => {
+  it("Btn component click event", () => {
     const mockCallBack = jest.fn();
 
     const button = enzyme.shallow(

@@ -1,6 +1,5 @@
 import axios from "axios";
 import { accessKey } from "./config.json";
-import ActionTypes from "../store/actions/types";
 import {
   fetchWeatherStart,
   fetchWeatherSuccess,

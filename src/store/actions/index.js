@@ -8,6 +8,11 @@ export const restoreLocalStorage = (storageData) => (dispatch) =>
     data: storageData,
   });
 
+export const resetAllData = () => (dispatch) =>
+  dispatch({
+    type: ActionTypes.RESET_ALL_DATA,
+  });
+
 export const setInitialData = () => (dispatch) => {
   const params = {
     default: true,
@@ -17,11 +22,6 @@ export const setInitialData = () => (dispatch) => {
     fetchCurrentWeather(cityName, params)(dispatch);
   });
 };
-
-export const resetAllData = (id) => (dispatch) =>
-  dispatch({
-    type: ActionTypes.RESET_ALL_DATA,
-  });
 
 export const fetchWeatherStart = () => (dispatch) =>
   dispatch({

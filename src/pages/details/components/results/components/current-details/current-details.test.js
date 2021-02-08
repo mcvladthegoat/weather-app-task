@@ -1,6 +1,6 @@
 import React from "react";
 import CurrentDetails, { detailsKeyList } from "./";
-import enzyme from "../../../../../config/enzyme";
+import enzyme from "../../../../../../../config/enzyme";
 
 describe("<CurrentDetails />", () => {
   let mockData = {};

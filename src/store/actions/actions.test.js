@@ -3,7 +3,10 @@ import thunk from "redux-thunk";
 
 import {
   restoreLocalStorage,
+  resetAllData,
   fetchWeatherStart,
+  fetchWeatherSuccess,
+  fetchWeatherFailure,
   removeDefaultCity,
   clearError,
   addNote,
@@ -25,7 +28,7 @@ describe("Testing redux actions data for reducer", () => {
 
   beforeEach(() => (store = mockStore(initialState)));
 
-  it("restoreLocalStorage action test", async () => {
+  it("restoreLocalStorage action test", () => {
     store.dispatch(restoreLocalStorage({ data: true }));
     expect(store.getActions()[0]).toEqual({
       type: ActionTypes.RESTORE_LOCAL_STORAGE,
@@ -35,14 +38,41 @@ describe("Testing redux actions data for reducer", () => {
     });
   });
 
-  it("fetchWeatherStart action test", async () => {
+  it("resetAllData action test", () => {
+    store.dispatch(resetAllData());
+    expect(store.getActions()[0]).toEqual({
+      type: ActionTypes.RESET_ALL_DATA,
+    });
+  });
+
+  it("fetchWeatherStart action test", () => {
     store.dispatch(fetchWeatherStart());
     expect(store.getActions()[0]).toEqual({
       type: ActionTypes.FETCH_WEATHER_START,
     });
   });
 
-  it("removeDefaultCity action test", async () => {
+  it("fetchWeatherSuccess action test", () => {
+    store.dispatch(fetchWeatherSuccess({ test: true }));
+    expect(store.getActions()[0]).toEqual({
+      type: ActionTypes.FETCH_WEATHER_SUCCESS,
+      data: {
+        test: true,
+      },
+    });
+  });
+
+  it("fetchWeatherFailure action test", () => {
+    store.dispatch(fetchWeatherFailure("error happened"));
+    expect(store.getActions()[0]).toEqual({
+      type: ActionTypes.FETCH_WEATHER_FAILURE,
+      data: {
+        error: "error happened",
+      },
+    });
+  });
+
+  it("removeDefaultCity action test", () => {
     store.dispatch(removeDefaultCity(1));
     expect(store.getActions()[0]).toEqual({
       type: ActionTypes.REMOVE_DEFAULT_CITY,
@@ -52,14 +82,14 @@ describe("Testing redux actions data for reducer", () => {
     });
   });
 
-  it("clearError action test", async () => {
+  it("clearError action test", () => {
     store.dispatch(clearError());
     expect(store.getActions()[0]).toEqual({
       type: ActionTypes.CLEAR_ERROR,
     });
   });
 
-  it("addNote action test", async () => {
+  it("addNote action test", () => {
     store.dispatch(addNote(1, "test note"));
     expect(store.getActions()[0]).toEqual({
       type: ActionTypes.ADD_NOTE,
@@ -70,7 +100,7 @@ describe("Testing redux actions data for reducer", () => {
     });
   });
 
-  it("editNote action test", async () => {
+  it("editNote action test", () => {
     store.dispatch(editNote(1, 234, "edited note"));
     expect(store.getActions()[0]).toEqual({
       type: ActionTypes.EDIT_NOTE,
@@ -82,7 +112,7 @@ describe("Testing redux actions data for reducer", () => {
     });
   });
 
-  it("removeNote action test", async () => {
+  it("removeNote action test", () => {
     store.dispatch(removeNote(1, 234));
     expect(store.getActions()[0]).toEqual({
       type: ActionTypes.REMOVE_NOTE,
@@ -93,7 +123,7 @@ describe("Testing redux actions data for reducer", () => {
     });
   });
 
-  it("setFavoriteCity action test", async () => {
+  it("setFavoriteCity action test", () => {
     store.dispatch(setFavoriteCity(1, true));
     expect(store.getActions()[0]).toEqual({
       type: ActionTypes.SET_FAVORITE_CITY,
@@ -104,7 +134,7 @@ describe("Testing redux actions data for reducer", () => {
     });
   });
 
-  it("removeFavoriteCity action test", async () => {
+  it("removeFavoriteCity action test", () => {
     store.dispatch(removeFavoriteCity(1));
     expect(store.getActions()[0]).toEqual({
       type: ActionTypes.SET_FAVORITE_CITY,
@@ -115,14 +145,14 @@ describe("Testing redux actions data for reducer", () => {
     });
   });
 
-  it("requestUserLocation action test", async () => {
+  it("requestUserLocation action test", () => {
     store.dispatch(requestUserLocation());
     expect(store.getActions()[0]).toEqual({
       type: ActionTypes.REQUEST_USER_LOCATION,
     });
   });
 
-  it("setUserLocationId action test", async () => {
+  it("setUserLocationId action test", () => {
     store.dispatch(setUserLocationId("12.345,56.789"));
     expect(store.getActions()[0]).toEqual({
       type: ActionTypes.SET_USER_LOCATION_ID,

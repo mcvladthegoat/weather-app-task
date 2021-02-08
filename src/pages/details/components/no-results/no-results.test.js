@@ -10,7 +10,7 @@ describe("<NoResults />", () => {
         <NoResults error={"no found results"}></NoResults>
       </MemoryRouter>
     );
-    const linkElement = screen.getByText(/no found results/i);
-    expect(linkElement).toBeInTheDocument();
+    const element = screen.getByText(/no found results/i);
+    expect(element).toBeInTheDocument();
   });
 });
