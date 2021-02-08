@@ -7,6 +7,11 @@ export const backupStoreItem = (key, data) => {
   }
 };
 
+export const removeAllBackups = () => {
+  localStorage.removeItem("weather");
+  localStorage.removeItem("notes");
+};
+
 export const convertCoordsToId = ({ lat = 0, lon = 0 }) => `${lat},${lon}`;
 
 export const sortLocationList = (list) =>

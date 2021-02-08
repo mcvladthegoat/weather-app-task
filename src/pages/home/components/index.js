@@ -1,4 +1,5 @@
 import SearchPanel from "./search-panel";
+import Status from "./status";
 import WeatherItem from "./weather-item";
 
-export { SearchPanel, WeatherItem };
+export { SearchPanel, Status, WeatherItem };

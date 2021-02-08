@@ -1,4 +1,4 @@
-import { backupStoreItem } from "../../utils";
+import { backupStoreItem, removeAllBackups } from "../../utils";
 import ActionTypes from "../actions/types";
 
 const backupMiddleware = (store) => (next) => (action) => {
@@ -14,6 +14,9 @@ const backupMiddleware = (store) => (next) => (action) => {
     case ActionTypes.EDIT_NOTE:
     case ActionTypes.REMOVE_NOTE:
       backupStoreItem("notes", state.root.notes);
+      break;
+    case ActionTypes.RESET_ALL_DATA:
+      removeAllBackups();
       break;
   }
 };

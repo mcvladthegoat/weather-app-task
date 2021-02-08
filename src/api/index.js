@@ -1,6 +1,11 @@
 import axios from "axios";
 import { accessKey } from "./config.json";
 import ActionTypes from "../store/actions/types";
+import {
+  fetchWeatherStart,
+  fetchWeatherSuccess,
+  fetchWeatherFailure,
+} from "../store/actions";
 import httpCodes from "./http-codes";
 
 const axiosInstance = axios.create();
@@ -20,7 +25,7 @@ export const fetchCurrentWeather = (rawQuery, params = defaultParams) => async (
 ) => {
   const query = rawQuery.replace("&", "");
 
-  dispatch({ type: ActionTypes.FETCH_WEATHER_START });
+  fetchWeatherStart()(dispatch);
   try {
     const response = await axiosInstance.get(currentWeatherApiUrl(query));
     if (response.data.error) {
@@ -28,25 +33,18 @@ export const fetchCurrentWeather = (rawQuery, params = defaultParams) => async (
     } else if (!response.data.location.lat || !response.data.location.lon) {
       throw Error(601); // for ex. this location hasn't essential data: -81.589569,162.099645
     } else {
-      dispatch({
-        type: ActionTypes.FETCH_WEATHER_SUCCESS,
-        data: {
-          ...response.data,
-          ...params,
-        },
-      });
+      fetchWeatherSuccess({
+        ...response.data,
+        ...params,
+      })(dispatch);
+
       return {
         lat: response.data.location.lat,
         lon: response.data.location.lon,
       };
     }
   } catch (error) {
-    dispatch({
-      type: ActionTypes.FETCH_WEATHER_FAILURE,
-      data: {
-        error: httpCodes(error.message),
-      },
-    });
+    fetchWeatherFailure(httpCodes(error.message))(dispatch);
     return false;
   }
 };

@@ -18,6 +18,28 @@ export const setInitialData = () => (dispatch) => {
   });
 };
 
+export const resetAllData = (id) => (dispatch) =>
+  dispatch({
+    type: ActionTypes.RESET_ALL_DATA,
+  });
+
+export const fetchWeatherStart = () => (dispatch) =>
+  dispatch({
+    type: ActionTypes.FETCH_WEATHER_START,
+  });
+
+export const fetchWeatherSuccess = (data) => (dispatch) =>
+  dispatch({
+    type: ActionTypes.FETCH_WEATHER_SUCCESS,
+    data,
+  });
+
+export const fetchWeatherFailure = (error) => (dispatch) =>
+  dispatch({
+    type: ActionTypes.FETCH_WEATHER_FAILURE,
+    data: { error },
+  });
+
 export const removeDefaultCity = (id) => (dispatch) =>
   dispatch({
     type: ActionTypes.REMOVE_DEFAULT_CITY,
@@ -29,10 +51,10 @@ export const clearError = () => (dispatch) =>
     type: ActionTypes.CLEAR_ERROR,
   });
 
-export const addNote = (id, value) => (dispatch) =>
+export const addNote = (id, value, noteId) => (dispatch) =>
   dispatch({
     type: ActionTypes.ADD_NOTE,
-    data: { id, value },
+    data: { id, value, noteId },
   });
 
 export const editNote = (id, noteId, value) => (dispatch) =>

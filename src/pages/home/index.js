@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { useHistory } from "react-router-dom";
 import { LocationIcon, Panel, ItemList } from "../../components";
-import { SearchPanel, WeatherItem } from "./components";
+import { SearchPanel, Status, WeatherItem } from "./components";
 
 import {
   clearError,
@@ -15,6 +15,7 @@ import {
   requestUserLocation,
   setUserLocationId,
   setInitialData,
+  resetAllData,
 } from "../../store/actions";
 import { fetchCurrentWeather } from "../../api";
 import Routes from "../../routes";
@@ -71,9 +72,8 @@ const HomePage = (props) => {
   const handleDeleteFavoriteItemClick = (id) => props.removeFavoriteCity(id);
 
   const handleResetClick = () => {
-    localStorage.removeItem("weather");
-    localStorage.removeItem("notes");
-    window.location.reload();
+    props.resetAllData();
+    props.setInitialData();
   };
 
   return (
@@ -88,12 +88,10 @@ const HomePage = (props) => {
             onSubmit={handleSubmit}
             error={props.error}
           />
-          {!props.userLocation.requested && <LocationIcon fading withLabel />}
-          {props.loading && (
-            <span className={styles.loading}>
-              {i18n.t("pages.home.loading")}
-            </span>
-          )}
+          <Status
+            loading={props.loading}
+            userLocationRequested={props.userLocation.requested}
+          />
         </Panel>
         <Panel>
           <ItemList
@@ -145,6 +143,7 @@ const mapDispatchToProps = (dispatch) =>
       requestUserLocation,
       setUserLocationId,
       setInitialData,
+      resetAllData,
     },
     dispatch
   );
@@ -165,6 +164,7 @@ HomePage.propTypes = {
   requestUserLocation: PropTypes.func.isRequired,
   setUserLocationId: PropTypes.func.isRequired,
   setInitialData: PropTypes.func.isRequired,
+  resetAllData: PropTypes.func.isRequired,
 };
 
 HomePage.defaultProps = {

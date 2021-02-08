@@ -1,8 +1,9 @@
-import configureStore from "redux-mock-store"; //ES6 modules
+import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
 
 import {
   restoreLocalStorage,
+  fetchWeatherStart,
   removeDefaultCity,
   clearError,
   addNote,
@@ -25,7 +26,7 @@ describe("Testing redux actions data for reducer", () => {
   beforeEach(() => (store = mockStore(initialState)));
 
   it("restoreLocalStorage action test", async () => {
-    await store.dispatch(restoreLocalStorage({ data: true }));
+    store.dispatch(restoreLocalStorage({ data: true }));
     expect(store.getActions()[0]).toEqual({
       type: ActionTypes.RESTORE_LOCAL_STORAGE,
       data: {
@@ -34,8 +35,15 @@ describe("Testing redux actions data for reducer", () => {
     });
   });
 
+  it("fetchWeatherStart action test", async () => {
+    store.dispatch(fetchWeatherStart());
+    expect(store.getActions()[0]).toEqual({
+      type: ActionTypes.FETCH_WEATHER_START,
+    });
+  });
+
   it("removeDefaultCity action test", async () => {
-    await store.dispatch(removeDefaultCity(1));
+    store.dispatch(removeDefaultCity(1));
     expect(store.getActions()[0]).toEqual({
       type: ActionTypes.REMOVE_DEFAULT_CITY,
       data: {
@@ -45,14 +53,14 @@ describe("Testing redux actions data for reducer", () => {
   });
 
   it("clearError action test", async () => {
-    await store.dispatch(clearError());
+    store.dispatch(clearError());
     expect(store.getActions()[0]).toEqual({
       type: ActionTypes.CLEAR_ERROR,
     });
   });
 
   it("addNote action test", async () => {
-    await store.dispatch(addNote(1, "test note"));
+    store.dispatch(addNote(1, "test note"));
     expect(store.getActions()[0]).toEqual({
       type: ActionTypes.ADD_NOTE,
       data: {
@@ -63,7 +71,7 @@ describe("Testing redux actions data for reducer", () => {
   });
 
   it("editNote action test", async () => {
-    await store.dispatch(editNote(1, 234, "edited note"));
+    store.dispatch(editNote(1, 234, "edited note"));
     expect(store.getActions()[0]).toEqual({
       type: ActionTypes.EDIT_NOTE,
       data: {
@@ -75,7 +83,7 @@ describe("Testing redux actions data for reducer", () => {
   });
 
   it("removeNote action test", async () => {
-    await store.dispatch(removeNote(1, 234));
+    store.dispatch(removeNote(1, 234));
     expect(store.getActions()[0]).toEqual({
       type: ActionTypes.REMOVE_NOTE,
       data: {
@@ -86,7 +94,7 @@ describe("Testing redux actions data for reducer", () => {
   });
 
   it("setFavoriteCity action test", async () => {
-    await store.dispatch(setFavoriteCity(1, true));
+    store.dispatch(setFavoriteCity(1, true));
     expect(store.getActions()[0]).toEqual({
       type: ActionTypes.SET_FAVORITE_CITY,
       data: {
@@ -97,7 +105,7 @@ describe("Testing redux actions data for reducer", () => {
   });
 
   it("removeFavoriteCity action test", async () => {
-    await store.dispatch(removeFavoriteCity(1));
+    store.dispatch(removeFavoriteCity(1));
     expect(store.getActions()[0]).toEqual({
       type: ActionTypes.SET_FAVORITE_CITY,
       data: {
@@ -108,14 +116,14 @@ describe("Testing redux actions data for reducer", () => {
   });
 
   it("requestUserLocation action test", async () => {
-    await store.dispatch(requestUserLocation());
+    store.dispatch(requestUserLocation());
     expect(store.getActions()[0]).toEqual({
       type: ActionTypes.REQUEST_USER_LOCATION,
     });
   });
 
   it("setUserLocationId action test", async () => {
-    await store.dispatch(setUserLocationId("12.345,56.789"));
+    store.dispatch(setUserLocationId("12.345,56.789"));
     expect(store.getActions()[0]).toEqual({
       type: ActionTypes.SET_USER_LOCATION_ID,
       data: {

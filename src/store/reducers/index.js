@@ -29,6 +29,9 @@ export const rootReducer = (state = initialState, action) => {
         return state;
       }
     }
+    case ActionTypes.RESET_ALL_DATA:
+      return initialState;
+
     case ActionTypes.FETCH_WEATHER_START: {
       return {
         ...state,
@@ -50,7 +53,7 @@ export const rootReducer = (state = initialState, action) => {
           current: res.current,
           default: isDefault,
           favorite: isFavorite,
-          updated_at: +moment.utc(),
+          updated_at: res.updated_at || +moment.utc(),
         },
       };
 
@@ -132,14 +135,14 @@ export const rootReducer = (state = initialState, action) => {
       };
     }
     case ActionTypes.ADD_NOTE: {
-      const { id: locationId, value } = action.data;
+      const { id: locationId, value, noteId } = action.data;
       const previousNotes = state.notes[locationId] || [];
       const notes = {
         ...state.notes,
         [locationId]: [
           ...previousNotes,
           {
-            id: +moment.utc(),
+            id: +noteId || +moment.utc(),
             value: value.toString(),
           },
         ],
