@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { useHistory } from "react-router-dom";
-import { LocationIcon, Panel, ItemList } from "../../components";
+import { Panel, ItemList } from "../../components";
 import { SearchPanel, Status, WeatherItem } from "./components";
 
 import {

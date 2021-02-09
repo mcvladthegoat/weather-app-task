@@ -34,6 +34,8 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-testing-library": "^3.9.2",
     "eslint-webpack-plugin": "^2.1.0",
+    "express": "^4.17.1",
+    "express-favicon": "^2.0.1",
     "file-loader": "6.1.1",
     "fs-extra": "^9.0.1",
     "html-webpack-plugin": "4.5.0",
@@ -92,6 +94,7 @@
   "scripts": {
     "prepare": "test ! -f src/api/config.json && cp -rf src/api/config.example.json src/api/config.json &2>/dev/null",
     "start": "npm run prepare ; node scripts/start.js",
+    "start:prod": "NODE_ENV=production npm run start",
     "build": "npm run prepare ; node scripts/build.js",
     "test": "node scripts/test.js",
     "lint": "eslint src/**/*.js",

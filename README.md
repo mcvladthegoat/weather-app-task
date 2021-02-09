@@ -8,7 +8,7 @@ Based on React, React Router, Redux, SCSS, i18next. For unit testing added Jest,
 
 Before start project locally, install all dependencies. Type `npm i` in project root. Then, you need to pass access key for using https://weatherstack.com/ API. There are 2 ways to pass it:
 
-- Directly via env var `ACCESS_KEY` (Useful for deployment)
+- Directly via env var `API_ACCESS_KEY` (Useful for production env)
 - Run `npm run prepare` and find `src/api/config.json`.
 
 In the project directory, you can run:

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import cs from "classnames";
 import i18n from "i18next";
 import Btn from "../btn";
 

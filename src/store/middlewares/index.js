@@ -18,6 +18,8 @@ const backupMiddleware = (store) => (next) => (action) => {
     case ActionTypes.RESET_ALL_DATA:
       removeAllBackups();
       break;
+    default:
+      break;
   }
 };
 
