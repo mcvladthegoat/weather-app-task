@@ -43,3 +43,21 @@ This command fixes code styles.
 ## Demo
 
 You can visit https://weather-app-practical.herokuapp.com/ to see how this app works in production mode.
+
+## Screenshots
+
+![home](images/start.png)
+
+![empty lists](images/empty-lists.png)
+
+![empty lists](images/loading.png)
+
+![empty lists](images/no-results.png)
+
+![empty lists](images/error-page.png)
+
+<img src="images/home-phone.png" alt="home-phone" style="zoom:40%;" />
+
+<img src="images/details-phone.png" alt="home-phone" style="zoom:40%;" />
+
+<img src="images/details-user-location-phone.png" alt="home-phone" style="zoom:40%;" />
