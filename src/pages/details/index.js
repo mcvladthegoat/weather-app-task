@@ -39,13 +39,13 @@ const DetailsPage = ({
   const data = weather[id];
 
   useEffect(() => {
-    if (!weather[id] && storageLoaded) {
+    if (!weather[id] && storageLoaded && !error) {
       fetchCurrentWeather(id).then((coords) => {
         const newId = convertCoordsToId(coords);
         setId(newId);
       });
     }
-  }, [weather[id], storageLoaded, fetchCurrentWeather]);
+  }, [weather[id], storageLoaded, fetchCurrentWeather, error]);
 
   useEffect(() => {
     return () => clearError();
