@@ -33,7 +33,7 @@ const ItemList = ({
   }, [items]);
 
   return (
-    <div className={cs(styles.wrapper, className)}>
+    <div className={className}>
       <div className={styles.heading}>
         <span>{isEditable ? i18n.t("item-list.editing") : title}</span>
         {items.length > 0 && (
