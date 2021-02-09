@@ -40,4 +40,6 @@ Useful for finding warnings and errors.
 
 This command fixes code styles.
 
-##
+## Demo
+
+You can visit https://weather-app-practical.herokuapp.com/ to see how this app works in production mode.

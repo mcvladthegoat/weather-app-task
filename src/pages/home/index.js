@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { useHistory } from "react-router-dom";
-import { Panel, ItemList } from "../../components";
+import { Btn, Panel, ItemList } from "../../components";
 import { SearchPanel, Status, WeatherItem } from "./components";
 
 import {
@@ -22,6 +22,8 @@ import Routes from "../../routes";
 import { convertCoordsToId, sortLocationList } from "../../utils";
 
 import styles from "./home.module.scss";
+
+const MAX_GEOLOCATION_API_TIMEOUT = 5000;
 
 const HomePage = (props) => {
   const history = useHistory();
@@ -47,7 +49,12 @@ const HomePage = (props) => {
             props.setUserLocationId
           );
         },
-        () => props.requestUserLocation()
+        () => props.requestUserLocation(),
+        {
+          enableHighAccuracy: true,
+          timeout: MAX_GEOLOCATION_API_TIMEOUT,
+          maximumAge: 0,
+        }
       );
     }
   }, [props.userLocation]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -116,9 +123,9 @@ const HomePage = (props) => {
           />
         </Panel>
         <Panel>
-          <a className={styles.resetLink} onClick={handleResetClick}>
+          <Btn colorScheme="link" size="sm" onClick={handleResetClick}>
             {i18n.t("pages.home.reset-data-link")}
-          </a>
+          </Btn>
         </Panel>
       </Panel>
     </>

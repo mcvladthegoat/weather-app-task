@@ -16,7 +16,7 @@ const Btn = ({ className, colorScheme, size, onClick, children }) => (
 Btn.propTypes = {
   children: PropTypes.any,
   className: PropTypes.string,
-  colorScheme: PropTypes.oneOf(["", "blue", "red", "white"]),
+  colorScheme: PropTypes.oneOf(["", "blue", "red", "white", "link"]),
   size: PropTypes.oneOf(["sm", "md"]),
   onClick: PropTypes.func,
 };
