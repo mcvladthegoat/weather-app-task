@@ -9,7 +9,8 @@ import httpCodes from "./http-codes";
 
 const axiosInstance = axios.create();
 
-const baseApiUrl = "http://api.weatherstack.com/";
+const apiProtocol = process.env.NODE_ENV === "production" ? "https" : "http";
+const baseApiUrl = `${apiProtocol}://api.weatherstack.com/`;
 const currentWeatherApiUrl = (query) =>
   `${baseApiUrl}/current?access_key=${
     accessKey || process.env.API_ACCESS_KEY
