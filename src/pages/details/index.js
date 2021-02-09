@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { useParams, useHistory } from "react-router-dom";
-import { Btn, Loader, LocationIcon, Panel } from "../../components";
+import { Loader, Panel } from "../../components";
 import { Results, NoResults } from "./components";
 
 import { fetchCurrentWeather } from "../../api";
@@ -19,24 +19,36 @@ import { convertCoordsToId } from "../../utils";
 
 import styles from "./details.module.scss";
 
-const DetailsPage = (props) => {
+const DetailsPage = ({
+  weather,
+  notes,
+  storageLoaded,
+  userLocationId,
+  loading,
+  error,
+  addNote,
+  editNote,
+  removeNote,
+  setFavoriteCity,
+  fetchCurrentWeather,
+  clearError,
+}) => {
   const history = useHistory();
   let { id: _id } = useParams();
   const [id, setId] = useState(_id);
-  const data = props.weather[id];
-  const notes = props.notes[id];
+  const data = weather[id];
 
   useEffect(() => {
-    if (!props.weather[id] && props.storageLoaded) {
-      props.fetchCurrentWeather(id).then((coords) => {
+    if (!weather[id] && storageLoaded) {
+      fetchCurrentWeather(id).then((coords) => {
         const newId = convertCoordsToId(coords);
         setId(newId);
       });
     }
-  }, [props.weather[id], props.storageLoaded]);
+  }, [id, weather, storageLoaded, fetchCurrentWeather]);
 
   useEffect(() => {
-    return () => props.clearError();
+    return () => clearError();
   }, []); /* eslint-disable-line react-hooks/exhaustive-deps */
 
   return (
@@ -45,21 +57,21 @@ const DetailsPage = (props) => {
         <title>{i18n.t("pages.details.title")}</title>
       </Helmet>
       <Panel className={styles.wrapper} styleScheme="white">
-        {props.error ? (
-          <NoResults error={props.error} />
-        ) : props.loading || !props.weather[id] ? (
+        {error ? (
+          <NoResults error={error} />
+        ) : loading || !weather[id] ? (
           <Loader className={styles.loader} />
         ) : (
           <Results
             locationId={id}
-            userLocationId={props.userLocationId}
+            userLocationId={userLocationId}
             history={history}
             data={data}
-            notes={notes}
-            addNote={props.addNote}
-            editNote={props.editNote}
-            removeNote={props.removeNote}
-            setFavoriteCity={props.setFavoriteCity}
+            notes={notes[id]}
+            addNote={addNote}
+            editNote={editNote}
+            removeNote={removeNote}
+            setFavoriteCity={setFavoriteCity}
           />
         )}
       </Panel>

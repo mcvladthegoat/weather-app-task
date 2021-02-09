@@ -26,7 +26,10 @@ export const rootReducer = (state = initialState, action) => {
           storageLoaded: true,
         };
       } catch (e) {
-        return state;
+        return {
+          ...state,
+          storageLoaded: true,
+        };
       }
     }
     case ActionTypes.RESET_ALL_DATA:

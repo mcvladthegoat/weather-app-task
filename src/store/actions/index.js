@@ -18,6 +18,8 @@ export const setInitialData = () => (dispatch) => {
     default: true,
   };
 
+  restoreLocalStorage()(dispatch);
+
   initialData.cities.forEach((cityName) => {
     fetchCurrentWeather(cityName, params)(dispatch);
   });

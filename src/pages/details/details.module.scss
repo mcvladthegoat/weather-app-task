@@ -10,6 +10,14 @@
   flex-flow: column wrap;
 }
 
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: auto;
+}
+
 @media screen and (max-width: $phone) {
   .wrapper {
     width: 80vw;

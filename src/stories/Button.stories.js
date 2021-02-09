@@ -1,36 +1,39 @@
 import React from "react";
 
-import { Button } from "./Button";
+import { Btn } from "../components";
 
-export default {
+const Story = {
   title: "Example/Button",
-  component: Button,
+  component: Btn,
   argTypes: {
     backgroundColor: { control: "color" },
   },
 };
 
-const Template = (args) => <Button {...args} />;
+export default Story;
 
-export const Primary = Template.bind({});
-Primary.args = {
-  primary: true,
-  label: "Button",
+const Template = (args) => <Btn {...args} />;
+
+export const Blue = Template.bind({});
+Blue.args = {
+  colorScheme: "blue",
+  label: "Blue Button",
 };
 
-export const Secondary = Template.bind({});
-Secondary.args = {
-  label: "Button",
+export const Red = Template.bind({});
+Red.args = {
+  colorScheme: "blue",
+  label: "Red Button",
 };
 
-export const Large = Template.bind({});
-Large.args = {
-  size: "large",
-  label: "Button",
-};
+// export const Large = Template.bind({});
+// Large.args = {
+//   size: "large",
+//   label: "Button",
+// };
 
-export const Small = Template.bind({});
-Small.args = {
-  size: "small",
-  label: "Button",
-};
+// export const Small = Template.bind({});
+// Small.args = {
+//   size: "small",
+//   label: "Button",
+// };

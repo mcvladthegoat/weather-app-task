@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import cs from "classnames";
 import i18n from "i18next";
 import { TextArea } from "../../../../../../../components";
 
-import editIcon from "./edit.svg";
-import cancelIcon from "./cancel.svg";
-import submitIcon from "./submit.svg";
+import editIcon from "./icons/edit.svg";
+import cancelIcon from "./icons/cancel.svg";
+import submitIcon from "./icons/submit.svg";
 
 import styles from "./note-item.module.scss";
 
@@ -39,7 +38,7 @@ const NoteItem = ({
   }, [isListEditable, value]);
 
   return (
-    <div className={cs(styles.item)} onClick={handleItemClick}>
+    <div className={styles.item} onClick={handleItemClick}>
       <div className={styles.left}>
         {!isEditing ? (
           value

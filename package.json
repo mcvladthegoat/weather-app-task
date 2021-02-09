@@ -104,7 +104,7 @@
     "lint": "eslint src/**/*.js",
     "format": "prettier --write \"src/**/*.{js,json,css,md}\"",
     "storybook": "start-storybook -p 6000 -s public",
-    "storybook:build": "build-storybook -s public_storybook"
+    "storybook:build": "build-storybook -s public"
   },
   "husky": {
     "hooks": {

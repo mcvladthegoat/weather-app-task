@@ -20,6 +20,15 @@ moment.locale("en");
 const PERLOCATE_TIMER_INTERVAL = 1000 * 60 * 5; // every 5 minutes;
 
 const App = (props) => {
+  const perlocateStore = () => {
+    props.perlocateWeatherData();
+
+    return setInterval(
+      () => props.perlocateWeatherData(),
+      PERLOCATE_TIMER_INTERVAL
+    );
+  };
+
   useEffect(() => {
     const weather = localStorage.getItem("weather");
     const notes = localStorage.getItem("notes");
@@ -28,11 +37,8 @@ const App = (props) => {
     } else {
       props.restoreLocalStorage({ weather, notes });
     }
-    const perlocateTimer = setInterval(
-      () => props.perlocateWeatherData(),
-      PERLOCATE_TIMER_INTERVAL
-    );
 
+    const perlocateTimer = perlocateStore();
     return () => clearInterval(perlocateTimer);
   }, []); /* eslint-disable-line react-hooks/exhaustive-deps */
 

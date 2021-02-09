@@ -1,8 +1,8 @@
 import React from "react";
-import FavoriteBtn from ".";
 import enzyme from "../../../../../../../config/enzyme";
 import i18n from "i18next";
 import { i18nextInit } from "../../../../../../translation";
+import FavoriteBtn from ".";
 
 describe("<FavoriteBtn />", () => {
   i18nextInit();

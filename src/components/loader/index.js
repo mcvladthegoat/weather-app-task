@@ -7,7 +7,7 @@ import styles from "./loader.module.scss";
 
 const Loader = ({ className }) => (
   <div className={cs(styles.wrapper, className)}>
-    <img className={styles.loader} src={icon} />
+    <img className={styles.loader} src={icon} alt="" />
   </div>
 );
 

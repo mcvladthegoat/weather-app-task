@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import i18n from "i18next";
 import { Btn, ItemList, Panel, TextArea } from "../../../../../../components";
