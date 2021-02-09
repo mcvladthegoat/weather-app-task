@@ -43,7 +43,11 @@ const NoteItem = ({
         {!isEditing ? (
           value
         ) : (
-          <TextArea value={newValue} onChange={setNewValue} />
+          <TextArea
+            className={styles.textArea}
+            value={newValue}
+            onChange={setNewValue}
+          />
         )}
       </div>
       <div className={styles.right}>

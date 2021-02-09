@@ -35,6 +35,13 @@
   width: 40px;
 }
 
+.textArea {
+  & textarea {
+    border: 1px solid $gray-light;
+    font-size: 14px;
+  }
+}
+
 .icon {
   width: 16px;
   height: 16px;
