@@ -45,11 +45,11 @@ const DetailsPage = ({
         setId(newId);
       });
     }
-  }, [id, weather, storageLoaded, fetchCurrentWeather]);
+  }, [weather[id], storageLoaded, fetchCurrentWeather]);
 
   useEffect(() => {
     return () => clearError();
-  }, []); /* eslint-disable-line react-hooks/exhaustive-deps */
+  }, []);
 
   return (
     <>

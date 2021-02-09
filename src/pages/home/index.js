@@ -57,7 +57,7 @@ const HomePage = (props) => {
         }
       );
     }
-  }, [props.userLocation]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [props.userLocation]);
 
   const handleSubmit = (value) => {
     if (value.trim().length > 0) {

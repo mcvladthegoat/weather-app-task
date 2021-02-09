@@ -40,7 +40,7 @@ const App = (props) => {
 
     const perlocateTimer = perlocateStore();
     return () => clearInterval(perlocateTimer);
-  }, []); /* eslint-disable-line react-hooks/exhaustive-deps */
+  }, []);
 
   return (
     <main className="app">
