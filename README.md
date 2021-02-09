@@ -54,7 +54,11 @@ You can visit https://weather-app-practical.herokuapp.com/ to see how this app w
 
 ![empty lists](images/no-results.png)
 
-![empty lists](images/error-page.png)
+![empty lists](images/error-page.png)![details-no-location](images/details.png)
+
+![details-with-note](images/details-with-note.png)
+
+![details-note-editing](images/details-note-editing.png)
 
 <img src="images/home-phone.png" alt="home-phone" style="zoom:40%;" />
 
