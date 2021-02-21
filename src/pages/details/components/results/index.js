@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import i18n from "i18next";
-import { Btn, LocationIcon } from "../../../../components";
-import { CurrentDetails, FavoriteBtn, Notes } from "./components";
+import { Btn, FavoriteBtn, LocationIcon } from "../../../../components";
+import { CurrentDetails, Notes } from "./components";
 import Routes from "../../../../routes";
 
 import styles from "./results.module.scss";

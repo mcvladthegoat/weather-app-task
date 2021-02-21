@@ -1,12 +1,9 @@
 import React from "react";
 import enzyme from "../../../config/enzyme";
 import i18n from "i18next";
-import { i18nextInit } from "../../translation";
 import ItemList from ".";
 
 describe("<ItemList />", () => {
-  i18nextInit();
-
   it("ItemList component renders without items", () => {
     const element = enzyme.mount(
       <ItemList

@@ -1,0 +1,14 @@
+@import "../../styles/colors";
+
+.button {
+  cursor: pointer;
+  border: none;
+  padding: 0;
+}
+
+.active {
+  path {
+    fill: $yellow;
+    stroke: $yellow;
+  }
+}

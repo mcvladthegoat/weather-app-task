@@ -1,10 +1,7 @@
 import httpCodes from "./http-codes";
 import i18n from "i18next";
-import { i18nextInit } from "../translation";
 
 describe("httpCodes()", () => {
-  i18nextInit();
-
   test("httpCodes with no input code", () => {
     expect(httpCodes()).toBe(i18n.t("errors.common"));
   });

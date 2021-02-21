@@ -1,12 +1,9 @@
 import React from "react";
 import enzyme from "../../../config/enzyme";
 import i18n from "i18next";
-import { i18nextInit } from "../../translation";
 import LocationIcon from ".";
 
 describe("<LocationIcon />", () => {
-  i18nextInit();
-
   it("LocationIcon component renders", () => {
     const element = enzyme.shallow(<LocationIcon />);
     expect(element.find("img").exists()).toBeTruthy();

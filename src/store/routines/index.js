@@ -19,7 +19,7 @@ export const perlocateWeatherData = () => (dispatch, getState) => {
   });
 
   if (removeQueue.length > 0) {
-    return dispatch({
+    dispatch({
       type: ActionTypes.REMOVE_WEATHER_DATA,
       data: { removeQueue },
     });

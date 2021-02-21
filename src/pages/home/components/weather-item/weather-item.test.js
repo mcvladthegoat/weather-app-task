@@ -1,12 +1,9 @@
 import React from "react";
 import enzyme from "../../../../../config/enzyme";
 import i18n from "i18next";
-import { i18nextInit } from "../../../../translation";
 import WeatherItem from ".";
 
 describe("<WeatherItem />", () => {
-  i18nextInit();
-
   const mockData = {
     id: "12.34",
     location: {
