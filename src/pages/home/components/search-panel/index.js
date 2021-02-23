@@ -21,7 +21,7 @@ const SearchPanel = ({ className, error, onSubmit, disabled }) => {
         onSubmit={handleSubmit}
         error={error}
       />
-      <Btn className={styles.btn} colorScheme="blue" onClick={handleSubmit}>
+      <Btn className={styles.btn} theme="blue" onClick={handleSubmit}>
         {i18n.t("pages.home.search.btn")}
       </Btn>
     </div>

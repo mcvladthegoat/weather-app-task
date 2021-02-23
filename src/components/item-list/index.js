@@ -6,24 +6,17 @@ import Btn from "../btn";
 import styles from "./item-list.module.scss";
 
 const ItemList = ({
-  onItemClick,
-  onClickEditMode,
-  onSaveNewItemValue,
+  eventHandlers,
   className,
   items,
   title,
   noItemsText,
   itemTemplate,
   keyPrefix,
+  showEditBtn,
 }) => {
   const [isEditable, setIsEditable] = useState(false);
   const handleEditBtnClick = () => setIsEditable(!isEditable);
-  const handleItemClick = (id) => {
-    isEditable ? onClickEditMode(id) : onItemClick(id);
-  };
-  const handleSaveNewItemValue = (id, value) => {
-    onSaveNewItemValue(id, value);
-  };
 
   useEffect(() => {
     if (items.length === 0) {
@@ -35,8 +28,8 @@ const ItemList = ({
     <div className={className}>
       <div className={styles.heading}>
         <span>{isEditable ? i18n.t("item-list.editing") : title}</span>
-        {items.length > 0 && (
-          <Btn colorScheme="blue" size="sm" onClick={handleEditBtnClick}>
+        {showEditBtn && items.length > 0 && (
+          <Btn theme="blue" size="sm" onClick={handleEditBtnClick}>
             {i18n.t(`item-list.edit-btn.${isEditable}`)}
           </Btn>
         )}
@@ -45,10 +38,9 @@ const ItemList = ({
         items.map((item) =>
           React.cloneElement(itemTemplate, {
             key: `item-${keyPrefix}-${item.id}`,
-            onClick: handleItemClick,
-            onSaveNewValue: handleSaveNewItemValue,
             data: item,
             isEditable: isEditable,
+            ...eventHandlers,
           })
         )
       ) : (
@@ -60,24 +52,22 @@ const ItemList = ({
 
 ItemList.propTypes = {
   className: PropTypes.string,
+  eventHandlers: PropTypes.objectOf(PropTypes.func),
   items: PropTypes.array,
   noItemsText: PropTypes.string,
   title: PropTypes.string,
-  onItemClick: PropTypes.func,
-  onClickEditMode: PropTypes.func,
-  onSaveNewItemValue: PropTypes.func,
   itemTemplate: PropTypes.element.isRequired,
   keyPrefix: PropTypes.string.isRequired,
+  showEditBtn: PropTypes.bool,
 };
 
 ItemList.defaultProps = {
   className: "",
+  eventHandlers: [],
   items: [],
   noItemsText: "",
   title: "",
-  onItemClick: () => {},
-  onClickEditMode: () => {},
-  onSaveNewItemValue: () => {},
+  showEditBtn: true,
 };
 
 export default ItemList;

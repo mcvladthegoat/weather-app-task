@@ -13,7 +13,6 @@ import {
   editNote,
   removeNote,
   setFavoriteCity,
-  removeFavoriteCity,
   requestUserLocation,
   setUserLocationId,
 } from ".";
@@ -130,17 +129,6 @@ describe("Testing redux actions data for reducer", () => {
       data: {
         id: 1,
         favorite: true,
-      },
-    });
-  });
-
-  it("removeFavoriteCity action test", () => {
-    store.dispatch(removeFavoriteCity(1));
-    expect(store.getActions()[0]).toEqual({
-      type: ActionTypes.SET_FAVORITE_CITY,
-      data: {
-        id: 1,
-        favorite: false,
       },
     });
   });

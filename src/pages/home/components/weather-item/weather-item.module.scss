@@ -22,8 +22,25 @@
 }
 
 .left {
-  overflow:hidden; 
-  white-space:nowrap; 
+  display: flex;
+  align-items: center;
+  overflow: hidden; 
+}
+
+.favoriteBtn {
+  margin: 0 5px 0 0;
+  width: 20px;
+  height: 20px;
+
+  & svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.name {
+  overflow: hidden; 
+  white-space: nowrap; 
   text-overflow: ellipsis;
 }
 

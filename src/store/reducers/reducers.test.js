@@ -12,7 +12,6 @@ import {
   editNote,
   removeNote,
   setFavoriteCity,
-  removeFavoriteCity,
   requestUserLocation,
   setUserLocationId,
   resetAllData,
@@ -81,7 +80,7 @@ describe("Testing redux reducer", () => {
     store.dispatch(fetchWeatherSuccess(mockData));
     store.dispatch(removeDefaultCity("12.34,56.78"));
     store.dispatch(setFavoriteCity("12.34,56.78", true));
-    store.dispatch(removeFavoriteCity("12.34,56.78"));
+    store.dispatch(setFavoriteCity("12.34,56.78", false));
 
     const actions = store.getActions();
     const stateAfterFetchWeatherSuccess = reducer(store.getState(), actions[0]);

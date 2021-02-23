@@ -11,8 +11,8 @@ import { SearchPanel, Status, WeatherItem } from "./components";
 import {
   clearError,
   removeDefaultCity,
-  removeFavoriteCity,
   requestUserLocation,
+  setFavoriteCity,
   setUserLocationId,
   setInitialData,
   resetAllData,
@@ -76,7 +76,8 @@ const HomePage = (props) => {
     }
   };
   const handleDeleteDefaultItemClick = (id) => props.removeDefaultCity(id);
-  const handleDeleteFavoriteItemClick = (id) => props.removeFavoriteCity(id);
+  const handleSetFavoriteItem = (id, favorite) =>
+    props.setFavoriteCity(id, favorite);
 
   const handleResetClick = () => {
     props.resetAllData();
@@ -106,8 +107,11 @@ const HomePage = (props) => {
             items={props.favorites}
             noItemsText={i18n.t("pages.home.favorites.no-items")}
             itemTemplate={<WeatherItem />}
-            onItemClick={handleItemClick}
-            onClickEditMode={handleDeleteFavoriteItemClick}
+            eventHandlers={{
+              onClickItem: handleItemClick,
+              onSetFavorite: handleSetFavoriteItem,
+            }}
+            showEditBtn={false}
             keyPrefix="favorites"
           />
         </Panel>
@@ -117,13 +121,16 @@ const HomePage = (props) => {
             items={props.defaults}
             noItemsText={i18n.t("pages.home.defaults.no-items")}
             itemTemplate={<WeatherItem />}
-            onItemClick={handleItemClick}
-            onClickEditMode={handleDeleteDefaultItemClick}
+            eventHandlers={{
+              onClickItem: handleItemClick,
+              onRemoveItem: handleDeleteDefaultItemClick,
+              onSetFavorite: handleSetFavoriteItem,
+            }}
             keyPrefix="defaults"
           />
         </Panel>
         <Panel>
-          <Btn colorScheme="link" size="sm" onClick={handleResetClick}>
+          <Btn theme="link" size="sm" onClick={handleResetClick}>
             {i18n.t("pages.home.reset-data-link")}
           </Btn>
         </Panel>
@@ -145,9 +152,9 @@ const mapDispatchToProps = (dispatch) =>
     {
       fetchCurrentWeather,
       removeDefaultCity,
-      removeFavoriteCity,
       clearError,
       requestUserLocation,
+      setFavoriteCity,
       setUserLocationId,
       setInitialData,
       resetAllData,
@@ -166,9 +173,9 @@ HomePage.propTypes = {
   loading: PropTypes.bool,
   fetchCurrentWeather: PropTypes.func.isRequired,
   removeDefaultCity: PropTypes.func.isRequired,
-  removeFavoriteCity: PropTypes.func.isRequired,
   clearError: PropTypes.func.isRequired,
   requestUserLocation: PropTypes.func.isRequired,
+  setFavoriteCity: PropTypes.func.isRequired,
   setUserLocationId: PropTypes.func.isRequired,
   setInitialData: PropTypes.func.isRequired,
   resetAllData: PropTypes.func.isRequired,

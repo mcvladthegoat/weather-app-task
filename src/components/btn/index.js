@@ -4,10 +4,11 @@ import cs from "classnames";
 
 import styles from "./btn.module.scss";
 
-const Btn = ({ className, colorScheme, size, onClick, children }) => (
+const Btn = ({ className, children, hoverTitle, onClick, size, theme }) => (
   <button
-    className={cs(styles.btn, styles[colorScheme], styles[size], className)}
+    className={cs(styles.btn, styles[theme], styles[size], className)}
     onClick={onClick}
+    title={hoverTitle}
   >
     {children}
   </button>
@@ -16,17 +17,19 @@ const Btn = ({ className, colorScheme, size, onClick, children }) => (
 Btn.propTypes = {
   children: PropTypes.any,
   className: PropTypes.string,
-  colorScheme: PropTypes.oneOf(["", "blue", "red", "white", "link"]),
-  size: PropTypes.oneOf(["sm", "md"]),
+  hoverTitle: PropTypes.string,
   onClick: PropTypes.func,
+  size: PropTypes.oneOf(["sm", "md"]),
+  theme: PropTypes.oneOf(["", "blue", "red", "white", "link"]),
 };
 
 Btn.defaultProps = {
   children: null,
   className: "",
-  colorScheme: "",
-  size: "md",
+  hoverTitle: "",
   onClick: () => {},
+  size: "md",
+  theme: "",
 };
 
 export default Btn;

@@ -24,8 +24,10 @@ const Notes = ({ data, onAddNote, onRemoveNote, onEditNote }) => {
         title={i18n.t("pages.details.notes.list-title")}
         items={data}
         itemTemplate={<NoteItem />}
-        onClickEditMode={onRemoveNote}
-        onSaveNewItemValue={onEditNote}
+        eventHandlers={{
+          onRemoveNote,
+          onEditNote,
+        }}
         noItemsText={i18n.t("pages.details.notes.no-items")}
         keyPrefix="notes"
       />
@@ -38,7 +40,7 @@ const Notes = ({ data, onAddNote, onRemoveNote, onEditNote }) => {
         />
         <Btn
           className={styles.newNoteBtn}
-          colorScheme="blue"
+          theme="blue"
           size="sm"
           onClick={handleSubmitNewNote}
         >

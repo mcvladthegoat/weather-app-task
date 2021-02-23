@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import i18n from "i18next";
-import { TextArea } from "../../../../../../../components";
+import { Btn, TextArea } from "../../../../../../../components";
 
-import editIcon from "./icons/edit.svg";
-import cancelIcon from "./icons/cancel.svg";
-import submitIcon from "./icons/submit.svg";
+import { ReactComponent as EditIcon } from "./icons/edit.svg";
+import { ReactComponent as CancelIcon } from "./icons/cancel.svg";
+import { ReactComponent as SubmitIcon } from "./icons/submit.svg";
 
 import styles from "./note-item.module.scss";
 
 const NoteItem = ({
-  onClick,
-  onSaveNewValue,
+  onRemoveNote,
+  onEditNote,
   data: { value, id },
   isEditable: isListEditable,
 }) => {
@@ -20,14 +20,14 @@ const NoteItem = ({
 
   const handleItemClick = () => {
     if (isListEditable) {
-      onClick(id);
+      onRemoveNote(id);
     }
   };
   const handleEditCancelIconClick = () => setIsEditing(!isEditing);
   const handleSubmitIconClick = () => {
     const value = newValue.trim();
     if (value.length > 0) {
-      onSaveNewValue(id, value);
+      onEditNote(id, value);
       setIsEditing(false);
     }
   };
@@ -54,26 +54,32 @@ const NoteItem = ({
         {!isListEditable &&
           (isEditing ? (
             <>
-              <img
-                src={submitIcon}
-                className={styles.icon}
+              <Btn
+                className={styles.btn}
                 onClick={handleSubmitIconClick}
-                alt={i18n.t("pages.details.notes.edit-btn-alt")}
-              />
-              <img
-                src={cancelIcon}
-                className={styles.icon}
+                hoverTitle={i18n.t("pages.details.notes.edit-btn-alt")}
+                size="sm"
+              >
+                <SubmitIcon className={styles.icon} />
+              </Btn>
+              <Btn
+                className={styles.btn}
                 onClick={handleEditCancelIconClick}
-                alt={i18n.t("pages.details.notes.edit-btn-alt")}
-              />
+                hoverTitle={i18n.t("pages.details.notes.edit-btn-alt")}
+                size="sm"
+              >
+                <CancelIcon className={styles.icon} />
+              </Btn>
             </>
           ) : (
-            <img
-              src={editIcon}
-              className={styles.icon}
+            <Btn
+              className={styles.btn}
               onClick={handleEditCancelIconClick}
-              alt={i18n.t("pages.details.notes.edit-btn-alt")}
-            />
+              hoverTitle={i18n.t("pages.details.notes.edit-btn-alt")}
+              size="sm"
+            >
+              <EditIcon className={styles.icon} />
+            </Btn>
           ))}
       </div>
     </div>
@@ -82,15 +88,15 @@ const NoteItem = ({
 
 NoteItem.propTypes = {
   data: PropTypes.any,
-  onClick: PropTypes.func,
-  onSaveNewItemValue: PropTypes.func,
+  onRemoveNote: PropTypes.func,
+  onEditNote: PropTypes.func,
   isEditable: PropTypes.bool,
 };
 
 NoteItem.defaultProps = {
   data: {},
-  onClick: () => {},
-  onSaveNewItemValue: () => {},
+  onRemoveNote: () => {},
+  onEditNote: () => {},
   isEditable: false,
 };
 

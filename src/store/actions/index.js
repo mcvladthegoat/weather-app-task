@@ -77,9 +77,6 @@ export const setFavoriteCity = (id, favorite) => (dispatch) =>
     data: { id, favorite },
   });
 
-export const removeFavoriteCity = (id) => (dispatch) =>
-  setFavoriteCity(id, false)(dispatch);
-
 export const requestUserLocation = () => (dispatch) =>
   dispatch({
     type: ActionTypes.REQUEST_USER_LOCATION,

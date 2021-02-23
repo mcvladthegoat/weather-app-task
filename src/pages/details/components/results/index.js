@@ -42,7 +42,7 @@ const Results = ({
         className={styles.goHome}
         onClick={handleGoToHomeBtn}
         size="sm"
-        colorScheme="blue"
+        theme="blue"
       >
         {i18n.t("pages.details.go-home")}
       </Btn>
