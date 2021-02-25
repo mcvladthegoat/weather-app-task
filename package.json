@@ -48,6 +48,7 @@
     "jest-watch-typeahead": "0.6.1",
     "key-mirror": "^1.0.1",
     "lint-staged": "^10.5.3",
+    "lodash": "^4.17.21",
     "mini-css-extract-plugin": "0.11.3",
     "moment": "^2.29.1",
     "node-sass": "^4.0.0",

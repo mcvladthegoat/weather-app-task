@@ -1,10 +1,15 @@
 @import '../../styles/colors';
 
-.wrapper {
+.textInput {
   width: 100%;
   display: flex;
   flex-flow: column wrap;
   align-items: baseline;
+}
+
+.wrapper {
+  position: relative;
+  width: 100%;
 }
 
 .input {
@@ -15,6 +20,7 @@
   border-radius: 4px;
   height: 38px;
   padding-left: 10px;
+  padding-right: 35px;
   box-sizing: border-box;
 
   &:disabled {
@@ -25,4 +31,15 @@
 .error {
   font-size: 12px;
   color: $red;
+}
+
+.clearBtn {
+  position: absolute;
+  top: 10px;
+  right: 5px;
+
+  & svg {
+    width: 15px;
+    height: 15px;
+  }
 }

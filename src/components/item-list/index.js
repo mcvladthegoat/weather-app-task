@@ -63,7 +63,7 @@ ItemList.propTypes = {
 
 ItemList.defaultProps = {
   className: "",
-  eventHandlers: [],
+  eventHandlers: {},
   items: [],
   noItemsText: "",
   title: "",

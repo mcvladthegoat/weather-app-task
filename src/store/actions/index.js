@@ -87,3 +87,14 @@ export const setUserLocationId = (id) => (dispatch) =>
     type: ActionTypes.SET_USER_LOCATION_ID,
     data: { id },
   });
+
+export const fetchSuggestionsSuccess = (results) => (dispatch) =>
+  dispatch({
+    type: ActionTypes.FETCH_SUGGESTIONS_SUCCESS,
+    data: { results },
+  });
+
+export const clearSuggestions = () => (dispatch) =>
+  dispatch({
+    type: ActionTypes.CLEAR_SUGGESTIONS,
+  });

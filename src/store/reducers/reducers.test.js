@@ -15,6 +15,8 @@ import {
   requestUserLocation,
   setUserLocationId,
   resetAllData,
+  fetchSuggestionsSuccess,
+  clearSuggestions,
 } from "../actions";
 import ActionTypes from "../actions/types";
 import { initialState, rootReducer as reducer } from "../reducers";
@@ -237,6 +239,25 @@ describe("Testing redux reducer", () => {
         id: "12.34,56.78",
         requested: true,
       },
+    });
+  });
+
+  it(`${ActionTypes.FETCH_SUGGESTIONS_SUCCESS} + ${ActionTypes.CLEAR_SUGGESTIONS} cases test`, () => {
+    store.dispatch(fetchSuggestionsSuccess(["A", "B", "C"]));
+    store.dispatch(clearSuggestions());
+    const actions = store.getActions();
+    const stateAfterFetchSuggestionsSuccess = reducer(
+      store.getState(),
+      actions[0]
+    );
+    expect(stateAfterFetchSuggestionsSuccess).toEqual({
+      ...initialState,
+      suggestions: ["A", "B", "C"],
+    });
+
+    expect(reducer(stateAfterFetchSuggestionsSuccess, actions[1])).toEqual({
+      ...initialState,
+      suggestions: [],
     });
   });
 });

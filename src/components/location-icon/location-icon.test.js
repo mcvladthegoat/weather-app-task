@@ -16,11 +16,11 @@ describe("<LocationIcon />", () => {
 
   it("LocationIcon component renders with fading prop", () => {
     const element = enzyme.shallow(<LocationIcon fading />);
-    expect(element.find("img").hasClass("fading")).toBeTruthy();
+    expect(element.find("svg").hasClass("fading")).toBeTruthy();
   });
 
   it("LocationIcon component renders with size=md prop", () => {
     const element = enzyme.shallow(<LocationIcon size="md" />);
-    expect(element.find("img").hasClass("md")).toBeTruthy();
+    expect(element.find("svg").hasClass("md")).toBeTruthy();
   });
 });

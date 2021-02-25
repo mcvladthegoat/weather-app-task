@@ -15,6 +15,8 @@ import {
   setFavoriteCity,
   requestUserLocation,
   setUserLocationId,
+  fetchSuggestionsSuccess,
+  clearSuggestions,
 } from ".";
 import ActionTypes from "./types";
 import { initialState } from "../reducers";
@@ -147,6 +149,23 @@ describe("Testing redux actions data for reducer", () => {
       data: {
         id: "12.345,56.789",
       },
+    });
+  });
+
+  it("fetchSuggestionsSuccess action test", () => {
+    store.dispatch(fetchSuggestionsSuccess(["A", "B", "C"]));
+    expect(store.getActions()[0]).toEqual({
+      type: ActionTypes.FETCH_SUGGESTIONS_SUCCESS,
+      data: {
+        suggestions: ["A", "B", "C"],
+      },
+    });
+  });
+
+  it("clearSuggestions action test", () => {
+    store.dispatch(clearSuggestions());
+    expect(store.getActions()[0]).toEqual({
+      type: ActionTypes.CLEAR_SUGGESTIONS,
     });
   });
 });

@@ -21,4 +21,7 @@ export default keyMirror({
   REQUEST_USER_LOCATION: null,
   SET_USER_LOCATION_ID: null,
   REMOVE_WEATHER_DATA: null,
+
+  FETCH_SUGGESTIONS_SUCCESS: null,
+  CLEAR_SUGGESTIONS: null,
 });

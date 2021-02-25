@@ -17,15 +17,15 @@ describe("<WeatherItem />", () => {
   };
   const mockCallBack = jest.fn();
   const result = enzyme.shallow(
-    <WeatherItem data={mockData} onClick={mockCallBack} />
+    <WeatherItem data={mockData} onClickItem={mockCallBack} />
   );
 
   it(`WeatherItem renders location name`, () => {
-    expect(result.find(".left").text()).toBe(mockData.location.name);
+    expect(result.find(".name").text()).toBe(mockData.location.name);
   });
 
   it(`WeatherItem renders temperature`, () => {
-    expect(result.find("span").text()).toBe(
+    expect(result.find(".right span").text()).toBe(
       i18n.t("weather.temperature", { value: mockData.current.temperature })
     );
   });
@@ -43,7 +43,7 @@ describe("<WeatherItem />", () => {
   });
 
   it(`WeatherItem click event`, () => {
-    result.find(".item").simulate("click");
+    result.simulate("click");
     expect(mockCallBack.mock.calls.length).toEqual(1);
   });
 });

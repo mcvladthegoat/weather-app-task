@@ -2,14 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 import cs from "classnames";
 import i18n from "i18next";
-import icon from "./icon.svg";
+import { ReactComponent as Icon } from "./icons/location.svg";
 
 import styles from "./location-icon.module.scss";
 
 const LocationIcon = ({ className, size, fading, withLabel }) => (
   <span className={cs(styles.wrapper, className)}>
-    <img
-      src={icon}
+    <Icon
       className={cs(styles.icon, styles[size], { [styles.fading]: fading })}
       alt={i18n.t("location-icon.alt")}
     />

@@ -7,6 +7,7 @@ export const initialState = {
   loading: false,
   error: null,
   storageLoaded: false,
+  suggestions: [],
   userLocation: {
     requested: false,
     id: null,
@@ -190,6 +191,28 @@ export const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         notes,
+      };
+    }
+    case ActionTypes.FETCH_SUGGESTIONS_SUCCESS: {
+      const { results } = action.data;
+      const suggestions = results.map((result) => {
+        const details = Object.entries(result)
+          .filter(
+            ([key, value]) =>
+              ["region", "country"].indexOf(key) > -1 && value.length > 0
+          )
+          .map(([key, value]) => value);
+        return `${result.name} (${details.join(", ")})`;
+      });
+      return {
+        ...state,
+        suggestions,
+      };
+    }
+    case ActionTypes.CLEAR_SUGGESTIONS: {
+      return {
+        ...state,
+        suggestions: [],
       };
     }
     default:

@@ -4,6 +4,11 @@
   cursor: pointer;
   border: none;
   padding: 0;
+
+  &:hover path {
+    fill: $yellow-dark;
+    stroke: $yellow-dark;
+  }
 }
 
 .active {

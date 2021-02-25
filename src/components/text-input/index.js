@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import cs from "classnames";
+import { Btn } from "../";
+import { ReactComponent as ClearIcon } from "./icons/clear.svg";
 
 import styles from "./text-input.module.scss";
 
@@ -28,21 +30,35 @@ const TextInput = (props) => {
     }
   };
 
+  const handleClearBtnClick = () => {
+    setValue("");
+    onChange("");
+  };
+
   useEffect(() => {
     setValue(defaultValue);
   }, [defaultValue]);
 
   return (
-    <div className={cs(styles.wrapper, className)}>
-      <input
-        className={styles.input}
-        type={type}
-        value={value}
-        placeholder={placeholder}
-        onChange={handleChange}
-        onKeyDown={handleKeyDown}
-        disabled={disabled}
-      />
+    <div className={cs(styles.textInput, className)}>
+      <div className={styles.wrapper}>
+        <input
+          className={styles.input}
+          type={type}
+          value={value}
+          placeholder={placeholder}
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
+          disabled={disabled}
+        />
+        <Btn
+          className={styles.clearBtn}
+          size="sm"
+          onClick={handleClearBtnClick}
+        >
+          <ClearIcon />
+        </Btn>
+      </div>
       {error && <span className={styles.error}>{error}</span>}
     </div>
   );

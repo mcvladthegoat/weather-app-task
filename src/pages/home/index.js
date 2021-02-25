@@ -16,8 +16,9 @@ import {
   setUserLocationId,
   setInitialData,
   resetAllData,
+  clearSuggestions,
 } from "../../store/actions";
-import { fetchCurrentWeather } from "../../api";
+import { fetchCurrentWeather, fetchSuggestions } from "../../api";
 import Routes from "../../routes";
 import { convertCoordsToId, sortLocationList } from "../../utils";
 
@@ -84,6 +85,11 @@ const HomePage = (props) => {
     props.setInitialData();
   };
 
+  const handleSearchChange = (value) => {
+    props.fetchSuggestions(value);
+  };
+  const handleSearchClear = () => props.clearSuggestions();
+
   return (
     <>
       <Helmet>
@@ -94,6 +100,9 @@ const HomePage = (props) => {
           <SearchPanel
             disabled={props.loading}
             onSubmit={handleSubmit}
+            onSearchChange={handleSearchChange}
+            onSearchClear={handleSearchClear}
+            suggestions={props.suggestions}
             error={props.error}
           />
           <Status
@@ -145,6 +154,7 @@ const mapStateToProps = ({ root }) => ({
   favorites: sortLocationList(root.weather).filter((item) => item.favorite),
   defaults: sortLocationList(root.weather).filter((item) => item.default),
   userLocation: root.userLocation,
+  suggestions: root.suggestions,
 });
 
 const mapDispatchToProps = (dispatch) =>
@@ -158,6 +168,8 @@ const mapDispatchToProps = (dispatch) =>
       setUserLocationId,
       setInitialData,
       resetAllData,
+      fetchSuggestions,
+      clearSuggestions,
     },
     dispatch
   );
@@ -171,6 +183,7 @@ HomePage.propTypes = {
   }).isRequired,
   error: PropTypes.any,
   loading: PropTypes.bool,
+  suggestions: PropTypes.array.isRequired,
   fetchCurrentWeather: PropTypes.func.isRequired,
   removeDefaultCity: PropTypes.func.isRequired,
   clearError: PropTypes.func.isRequired,
@@ -179,6 +192,8 @@ HomePage.propTypes = {
   setUserLocationId: PropTypes.func.isRequired,
   setInitialData: PropTypes.func.isRequired,
   resetAllData: PropTypes.func.isRequired,
+  fetchSuggestions: PropTypes.func.isRequired,
+  clearSuggestions: PropTypes.func.isRequired,
 };
 
 HomePage.defaultProps = {
