@@ -1,0 +1,19 @@
+@import "../../../../../styles/colors";
+@import "../../../../../styles/media";
+
+.wrapper {
+  position: absolute;
+  top: 50px;
+  width: 100%;
+  border: 1px solid $gray-light;
+  border-radius: 4px;
+  background-color: $white;
+  max-height: 50vh;
+  overflow: scroll;
+}
+
+.list {
+  & .heading {
+    display: none;
+  }
+}

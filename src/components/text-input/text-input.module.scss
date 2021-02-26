@@ -20,12 +20,16 @@
   border-radius: 4px;
   height: 38px;
   padding-left: 10px;
-  padding-right: 35px;
+  padding-right: 10px;
   box-sizing: border-box;
 
   &:disabled {
     background-color: $gray-light-2;
   }
+}
+
+.withClearBtn {
+  padding-right: 35px;
 }
 
 .error {

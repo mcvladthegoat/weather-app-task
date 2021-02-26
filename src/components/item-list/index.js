@@ -26,14 +26,16 @@ const ItemList = ({
 
   return (
     <div className={className}>
-      <div className={styles.heading}>
-        <span>{isEditable ? i18n.t("item-list.editing") : title}</span>
-        {showEditBtn && items.length > 0 && (
-          <Btn theme="blue" size="sm" onClick={handleEditBtnClick}>
-            {i18n.t(`item-list.edit-btn.${isEditable}`)}
-          </Btn>
-        )}
-      </div>
+      {title && (
+        <div className={styles.heading}>
+          <span>{isEditable ? i18n.t("item-list.editing") : title}</span>
+          {showEditBtn && items.length > 0 && (
+            <Btn theme="blue" size="sm" onClick={handleEditBtnClick}>
+              {i18n.t(`item-list.edit-btn.${isEditable}`)}
+            </Btn>
+          )}
+        </div>
+      )}
       {items.length > 0 ? (
         items.map((item) =>
           React.cloneElement(itemTemplate, {

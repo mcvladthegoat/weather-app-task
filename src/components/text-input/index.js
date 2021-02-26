@@ -39,11 +39,13 @@ const TextInput = (props) => {
     setValue(defaultValue);
   }, [defaultValue]);
 
+  const withClearBtn = value.length > 0;
+
   return (
     <div className={cs(styles.textInput, className)}>
       <div className={styles.wrapper}>
         <input
-          className={styles.input}
+          className={cs(styles.input, { [styles.withClearBtn]: withClearBtn })}
           type={type}
           value={value}
           placeholder={placeholder}
@@ -51,13 +53,15 @@ const TextInput = (props) => {
           onKeyDown={handleKeyDown}
           disabled={disabled}
         />
-        <Btn
-          className={styles.clearBtn}
-          size="sm"
-          onClick={handleClearBtnClick}
-        >
-          <ClearIcon />
-        </Btn>
+        {withClearBtn && (
+          <Btn
+            className={styles.clearBtn}
+            size="sm"
+            onClick={handleClearBtnClick}
+          >
+            <ClearIcon />
+          </Btn>
+        )}
       </div>
       {error && <span className={styles.error}>{error}</span>}
     </div>

@@ -62,6 +62,7 @@ const HomePage = (props) => {
 
   const handleSubmit = (value) => {
     if (value.trim().length > 0) {
+      props.clearSuggestions();
       props.fetchCurrentWeather(value).then((coords) => {
         if (coords) {
           goToDetailsPage(convertCoordsToId(coords));

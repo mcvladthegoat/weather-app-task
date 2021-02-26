@@ -195,18 +195,19 @@ export const rootReducer = (state = initialState, action) => {
     }
     case ActionTypes.FETCH_SUGGESTIONS_SUCCESS: {
       const { results } = action.data;
-      const suggestions = results.map((result) => {
+      const suggestions = results.map((result, id) => {
         const details = Object.entries(result)
           .filter(
             ([key, value]) =>
               ["region", "country"].indexOf(key) > -1 && value.length > 0
           )
-          .map(([key, value]) => value);
-        return `${result.name} (${details.join(", ")})`;
+          .map(([_, value]) => value);
+        return { id, name: `${result.name} (${details.join(", ")})` };
       });
       return {
         ...state,
         suggestions,
+        error: null,
       };
     }
     case ActionTypes.CLEAR_SUGGESTIONS: {

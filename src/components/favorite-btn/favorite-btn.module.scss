@@ -1,19 +1,25 @@
 @import "../../styles/colors";
+@import "../../styles/media";
+
 
 .button {
   cursor: pointer;
   border: none;
   padding: 0;
-
-  &:hover path {
-    fill: $yellow-dark;
-    stroke: $yellow-dark;
-  }
 }
 
 .active {
   path {
     fill: $yellow;
     stroke: $yellow;
+  }
+}
+
+@media screen and (min-width: $desktop) {
+  .button {
+    &:hover path {
+      fill: $yellow-dark;
+      stroke: $yellow-dark;
+    }
   }
 }

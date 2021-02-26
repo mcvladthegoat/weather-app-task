@@ -2,6 +2,7 @@ import React, { useCallback, useState } from "react";
 import PropTypes from "prop-types";
 import cs from "classnames";
 import i18n from "i18next";
+import Perimeter from "react-outside-click-handler";
 import { debounce } from "lodash";
 import { Btn, TextInput } from "../../../../components";
 import SuggestionList from "./suggestion-list";
@@ -20,6 +21,7 @@ const SearchPanel = ({
   suggestions,
 }) => {
   const [value, setValue] = useState("");
+  const [isFocused, setIsFocused] = useState(false);
   const debouncedChange = useCallback(
     debounce((value) => onSearchChange(value), DEBOUNCE_DELAY),
     []
@@ -34,22 +36,36 @@ const SearchPanel = ({
     }
   };
   const handleSubmit = () => !disabled && onSubmit(value);
-  const handleSearchClear = () => onSearchClear();
+  const handleSuggestionItemClick = (id) => () => {
+    if (!disabled) {
+      const value = suggestions.find((suggestion) => suggestion.id === id).name;
+      onSubmit(value);
+    }
+  };
+
+  const handleBlur = () => setIsFocused(false);
+  const handleFocus = () => setIsFocused(true);
 
   return (
-    <div className={cs(styles.wrapper, className)}>
-      <TextInput
-        disabled={disabled}
-        placeholder={i18n.t("pages.home.search.placeholder")}
-        onChange={handleChange}
-        onSubmit={handleSubmit}
-        error={error}
-      />
-      <Btn className={styles.btn} theme="blue" onClick={handleSubmit}>
-        {i18n.t("pages.home.search.btn")}
-      </Btn>
-      {/* <SuggestionList data={suggestions} onBlur={handleSearchClear} /> */}
-    </div>
+    <Perimeter onOutsideClick={handleBlur} display="contents">
+      <div className={cs(styles.wrapper, className)} onFocus={handleFocus}>
+        <TextInput
+          disabled={disabled}
+          placeholder={i18n.t("pages.home.search.placeholder")}
+          onChange={handleChange}
+          onSubmit={handleSubmit}
+          error={error}
+        />
+        <Btn className={styles.btn} theme="blue" onClick={handleSubmit}>
+          {i18n.t("pages.home.search.btn")}
+        </Btn>
+        <SuggestionList
+          data={suggestions}
+          onClickItem={handleSuggestionItemClick}
+          disabled={!isFocused}
+        />
+      </div>
+    </Perimeter>
   );
 };
 

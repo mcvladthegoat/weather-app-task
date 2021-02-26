@@ -1,0 +1,11 @@
+@import "../../../../../../styles/colors";
+
+.item {
+  font-size: 14px;
+  padding: 6px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $gray-light-2;
+  }
+}
