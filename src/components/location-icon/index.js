@@ -6,28 +6,30 @@ import { ReactComponent as Icon } from "./icons/location.svg";
 
 import styles from "./location-icon.module.scss";
 
-const LocationIcon = ({ className, size, fading, withLabel }) => (
-  <span className={cs(styles.wrapper, className)}>
+const LocationIcon = ({ className, size, fading, label, onClick }) => (
+  <div className={cs(styles.wrapper, className)} onClick={onClick}>
     <Icon
       className={cs(styles.icon, styles[size], { [styles.fading]: fading })}
       alt={i18n.t("location-icon.alt")}
     />
-    {withLabel && i18n.t("location-icon.label")}
-  </span>
+    <span>{label}</span>
+  </div>
 );
 
 LocationIcon.propTypes = {
   className: PropTypes.string,
   size: PropTypes.oneOf(["sm", "md"]),
   fading: PropTypes.bool,
-  withLabel: PropTypes.bool,
+  label: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 LocationIcon.defaultProps = {
   className: "",
   size: "sm",
   fading: false,
-  withLabel: false,
+  label: "",
+  onClick: () => {},
 };
 
 export default LocationIcon;

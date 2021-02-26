@@ -243,7 +243,23 @@ describe("Testing redux reducer", () => {
   });
 
   it(`${ActionTypes.FETCH_SUGGESTIONS_SUCCESS} + ${ActionTypes.CLEAR_SUGGESTIONS} cases test`, () => {
-    store.dispatch(fetchSuggestionsSuccess(["A", "B", "C"]));
+    const mockSuggestions = [
+      {
+        lat: "12.34",
+        lon: "56.78",
+        name: "New York",
+        region: "New York State",
+        country: "USA",
+      },
+      {
+        lat: "23.43",
+        lon: "65.87",
+        name: "Berlin",
+        region: "",
+        country: "Germany",
+      },
+    ];
+    store.dispatch(fetchSuggestionsSuccess(mockSuggestions));
     store.dispatch(clearSuggestions());
     const actions = store.getActions();
     const stateAfterFetchSuggestionsSuccess = reducer(
@@ -252,7 +268,16 @@ describe("Testing redux reducer", () => {
     );
     expect(stateAfterFetchSuggestionsSuccess).toEqual({
       ...initialState,
-      suggestions: ["A", "B", "C"],
+      suggestions: [
+        {
+          id: "12.34,56.78",
+          name: "New York (New York State, USA)",
+        },
+        {
+          id: "23.43,65.87",
+          name: "Berlin (Germany)",
+        },
+      ],
     });
 
     expect(reducer(stateAfterFetchSuggestionsSuccess, actions[1])).toEqual({

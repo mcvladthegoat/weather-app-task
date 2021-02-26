@@ -31,6 +31,7 @@ describe("<ItemList />", () => {
 
   const element = enzyme.mount(
     <ItemList
+      title="title"
       keyPrefix={"test-1"}
       itemTemplate={<TestItemTemplate />}
       items={mockData}
@@ -54,5 +55,32 @@ describe("<ItemList />", () => {
     expect(element.find("button").text()).toBe(
       i18n.t("item-list.edit-btn.false")
     );
+  });
+
+  it("ItemList component DOESN'T render edit btn when prop showEditBtn=false", () => {
+    const element = enzyme.mount(
+      <ItemList
+        title="title"
+        keyPrefix={"test-1"}
+        itemTemplate={<TestItemTemplate />}
+        items={mockData}
+        noItemsText="no items test"
+        showEditBtn={false}
+      />
+    );
+    expect(element.exists("button")).toBeFalsy();
+  });
+
+  it("ItemList component DOESN'T render .heading without prop title", () => {
+    const element = enzyme.mount(
+      <ItemList
+        keyPrefix={"test-1"}
+        itemTemplate={<TestItemTemplate />}
+        items={mockData}
+        noItemsText="no items test"
+        showEditBtn={true}
+      />
+    );
+    expect(element.exists(".heading")).toBeFalsy();
   });
 });

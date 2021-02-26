@@ -9,11 +9,10 @@ import SuggestionList from "./suggestion-list";
 
 import styles from "./search-panel.module.scss";
 
-const DEBOUNCE_DELAY = 500;
+const DEBOUNCE_DELAY = 400;
 
 const SearchPanel = ({
   className,
-  error,
   onSubmit,
   onSearchChange,
   onSearchClear,
@@ -54,7 +53,6 @@ const SearchPanel = ({
           placeholder={i18n.t("pages.home.search.placeholder")}
           onChange={handleChange}
           onSubmit={handleSubmit}
-          error={error}
         />
         <Btn className={styles.btn} theme="blue" onClick={handleSubmit}>
           {i18n.t("pages.home.search.btn")}
@@ -71,7 +69,6 @@ const SearchPanel = ({
 
 SearchPanel.propTypes = {
   className: PropTypes.string,
-  error: PropTypes.string,
   onSearchChange: PropTypes.func,
   onSearchClear: PropTypes.func,
   onSubmit: PropTypes.func,
@@ -81,7 +78,6 @@ SearchPanel.propTypes = {
 
 SearchPanel.defaultProps = {
   className: "",
-  error: "",
   onSearchChange: () => {},
   onSearchClear: () => {},
   onSubmit: () => {},

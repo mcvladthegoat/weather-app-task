@@ -16,6 +16,10 @@ $duration: 1s;
   font-size: 12px;
 }
 
+.icon {
+  margin-right: 4px;
+}
+
 .fading {
   animation: fadeInOut infinite ease $duration;
   -webkit-animation: fadeInOut infinite ease $duration;

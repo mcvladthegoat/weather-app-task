@@ -1,3 +1,22 @@
+@import "../../../../styles/colors";
+
+.wrapper {
+  margin-top: 8px;
+}
+
 .loading {
   font-size: 12px;
+}
+
+.error {
+  font-size: 12px;
+  color: $red;
+}
+
+.locationIconActive {
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }

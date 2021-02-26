@@ -57,7 +57,7 @@ const NoteItem = ({
               <Btn
                 className={styles.btn}
                 onClick={handleSubmitIconClick}
-                hoverTitle={i18n.t("pages.details.notes.edit-btn-alt")}
+                hoverTitle={i18n.t("pages.details.notes.submit-btn-alt")}
                 size="sm"
               >
                 <SubmitIcon className={styles.icon} />
@@ -65,7 +65,7 @@ const NoteItem = ({
               <Btn
                 className={styles.btn}
                 onClick={handleEditCancelIconClick}
-                hoverTitle={i18n.t("pages.details.notes.edit-btn-alt")}
+                hoverTitle={i18n.t("pages.details.notes.cancel-btn-alt")}
                 size="sm"
               >
                 <CancelIcon className={styles.icon} />

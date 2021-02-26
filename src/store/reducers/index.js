@@ -1,5 +1,6 @@
 import moment from "moment";
 import ActionTypes from "../actions/types";
+import { convertCoordsToId } from "../../utils";
 
 export const initialState = {
   weather: {},
@@ -195,13 +196,15 @@ export const rootReducer = (state = initialState, action) => {
     }
     case ActionTypes.FETCH_SUGGESTIONS_SUCCESS: {
       const { results } = action.data;
-      const suggestions = results.map((result, id) => {
+      const suggestions = results.map((result) => {
+        const { lat, lon } = result;
         const details = Object.entries(result)
           .filter(
             ([key, value]) =>
               ["region", "country"].indexOf(key) > -1 && value.length > 0
           )
           .map(([_, value]) => value);
+        const id = convertCoordsToId({ lat, lon });
         return { id, name: `${result.name} (${details.join(", ")})` };
       });
       return {

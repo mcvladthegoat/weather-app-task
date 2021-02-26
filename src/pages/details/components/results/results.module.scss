@@ -46,6 +46,10 @@
   }
 }
 
+.title {
+  word-break: break-word;
+}
+
 .body {
   display: flex;
   justify-content: space-between;

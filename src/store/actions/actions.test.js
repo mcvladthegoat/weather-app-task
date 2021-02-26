@@ -157,7 +157,7 @@ describe("Testing redux actions data for reducer", () => {
     expect(store.getActions()[0]).toEqual({
       type: ActionTypes.FETCH_SUGGESTIONS_SUCCESS,
       data: {
-        suggestions: ["A", "B", "C"],
+        results: ["A", "B", "C"],
       },
     });
   });

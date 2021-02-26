@@ -8,8 +8,7 @@
       }
     },
     "location-icon": {
-      "alt": "Your location",
-      "label": "Finding location"
+      "alt": "Your location"
     },
     "pages": {
       "home": {
@@ -17,6 +16,10 @@
         "search": {
           "btn": "Search",
           "placeholder": "Type name, coordinates or IP address"
+        },
+        "location-icon": {
+          "finding-label": "Finding location",
+          "open-page-label": "Show weather for your location"
         },
         "favorites": {
           "title": "Favorites",
@@ -39,6 +42,8 @@
         "notes": {
           "add-new": "Save",
           "placeholder": "You can save new notes here",
+          "submit-btn-alt": "Submit",
+          "cancel-btn-alt": "Cancel",
           "edit-btn-alt": "Edit",
           "list-title": "Notes",
           "no-items": "There are no notes"

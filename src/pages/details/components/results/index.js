@@ -63,7 +63,7 @@ const Results = ({
           />
         </div>
         <div>
-          <h3>
+          <h3 className={styles.title}>
             {data.location.name} ({data.location.country})
           </h3>
           <h1>

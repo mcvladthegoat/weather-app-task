@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import cs from "classnames";
-import { ItemList } from "../../../../../components";
+import ItemList from "../../../../../components/item-list";
 import SuggestionItem from "./suggestion-item";
 
 import styles from "./suggestion-list.module.scss";
@@ -18,7 +18,6 @@ const SuggestionList = ({ data, disabled, onClickItem }) => {
             eventHandlers={{
               onClickItem,
             }}
-            showEditBtn={false}
             keyPrefix="suggestions"
           />
         </div>

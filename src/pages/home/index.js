@@ -30,7 +30,7 @@ const HomePage = (props) => {
   const history = useHistory();
   const goToDetailsPage = (id) => history.push(Routes.detailsByIdPage(id));
 
-  const handleLocationSearch = (rawCoords, cb) => {
+  const handleLocationSearch = (rawCoords, cb = () => {}) => {
     props.fetchCurrentWeather(rawCoords).then((newCoords) => {
       if (newCoords) {
         const coords = convertCoordsToId(newCoords);
@@ -45,10 +45,7 @@ const HomePage = (props) => {
       navigator.geolocation.getCurrentPosition(
         ({ coords: { latitude: lat, longitude: lon } }) => {
           props.requestUserLocation();
-          handleLocationSearch(
-            convertCoordsToId({ lat, lon }),
-            props.setUserLocationId
-          );
+          props.setUserLocationId(convertCoordsToId({ lat, lon }));
         },
         () => props.requestUserLocation(),
         {
@@ -60,23 +57,28 @@ const HomePage = (props) => {
     }
   }, [props.userLocation]);
 
+  const handleUserLocationLinkClick = () => {
+    const { id } = props.userLocation;
+    if (id) {
+      handleLocationSearch(id, props.setUserLocationId);
+    }
+  };
+
   const handleSubmit = (value) => {
     if (value.trim().length > 0) {
       props.clearSuggestions();
-      props.fetchCurrentWeather(value).then((coords) => {
-        if (coords) {
-          goToDetailsPage(convertCoordsToId(coords));
-        }
-      });
+      handleLocationSearch(value);
     }
   };
 
   const handleItemClick = (id) => {
-    if (!props.loading && props.userLocation.requested) {
+    if (!props.loading) {
       props.clearError();
+      props.clearSuggestions();
       goToDetailsPage(id);
     }
   };
+
   const handleDeleteDefaultItemClick = (id) => props.removeDefaultCity(id);
   const handleSetFavoriteItem = (id, favorite) =>
     props.setFavoriteCity(id, favorite);
@@ -86,9 +88,7 @@ const HomePage = (props) => {
     props.setInitialData();
   };
 
-  const handleSearchChange = (value) => {
-    props.fetchSuggestions(value);
-  };
+  const handleSearchChange = (value) => props.fetchSuggestions(value);
   const handleSearchClear = () => props.clearSuggestions();
 
   return (
@@ -107,8 +107,10 @@ const HomePage = (props) => {
             error={props.error}
           />
           <Status
+            error={props.error}
             loading={props.loading}
-            userLocationRequested={props.userLocation.requested}
+            userLocation={props.userLocation}
+            onUserLocationLinkClick={handleUserLocationLinkClick}
           />
         </Panel>
         <Panel>
