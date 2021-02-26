@@ -5,7 +5,6 @@ import TextArea from "./index";
 describe("<TextArea />", () => {
   test("TextArea sets value", () => {
     const result = enzyme.mount(<TextArea value={"new value"} />);
-    // result.find('textarea').simulate('change', { target: { value: 'new value' } });
     expect(result.find("textarea").text()).toEqual("new value");
   });
 

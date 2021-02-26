@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import cs from "classnames";
 import ItemList from "../../../../../components/item-list";
 import SuggestionItem from "./suggestion-item";
 
@@ -10,7 +9,7 @@ const SuggestionList = ({ data, disabled, onClickItem }) => {
   return (
     <>
       {data.length > 0 && !disabled && (
-        <div className={cs(styles.wrapper)}>
+        <div className={styles.wrapper}>
           <ItemList
             className={styles.list}
             items={data}
