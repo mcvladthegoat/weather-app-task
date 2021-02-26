@@ -54,6 +54,6 @@ You can visit https://weather-app-practical.herokuapp.com/ to see how this app w
 
 Note: if you want to see old screenshots (before issues fixing), open `images/old` folder (or click [here](images/old))
 
-<img src="images/start.png" alt="home" width="350" /><img src="images/loading.png" alt="empty lists" width="350" /><img src="images/start-with-suggestion.png" alt="location suggestion" width="350" /><img src="images/no-results.png" alt="no results" width="350" /><img src="images/error-page.png" alt="error page" width="350" /><img src="images/details-with-note.png" alt="details page with note" width="350" /><img src="images/details-note-editing" alt="details page - note editing" width="350" />
+<img src="images/start.png" alt="home" width="350" /><img src="images/loading.png" alt="empty lists" width="350" /><img src="images/start-with-suggestion.png" alt="location suggestion" width="350" /><img src="images/no-results.png" alt="no results" width="350" /><img src="images/error-page.png" alt="error page" width="350" /><img src="images/details-with-note.png" alt="details page with note" width="350" /><img src="images/details-note-editing.png" alt="details page - note editing" width="350" />
 
 <img src="images/home-phone.png" alt="home-phone" width="250" /><img src="images/home-phone-with-suggestion.png" alt="phone with suggestion" width="250" /><img src="images/home-phone-2.png" alt="home-phone" width="250" /><img src="images/details-phone.png" alt="home-phone" width="250" />
