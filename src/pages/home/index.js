@@ -30,8 +30,8 @@ const HomePage = (props) => {
   const history = useHistory();
   const goToDetailsPage = (id) => history.push(Routes.detailsByIdPage(id));
 
-  const handleLocationSearch = (rawCoords, cb = () => {}) => {
-    props.fetchCurrentWeather(rawCoords).then((newCoords) => {
+  const handleLocationSearch = (query, cb = () => {}) => {
+    props.fetchCurrentWeather(query).then((newCoords) => {
       if (newCoords) {
         const coords = convertCoordsToId(newCoords);
         cb(coords);

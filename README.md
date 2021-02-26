@@ -40,28 +40,29 @@ Useful for finding warnings and errors.
 
 This command fixes code styles.
 
+## Important notes
+
+You can use city suggestion feature. Based on Weatherstack Autocomplete feature. But it's available only for **Standard plan** and higher. So if you want to run this app for ex. locally, you should upgrade your plan.
+
+For more information you can visit https://weatherstack.com/documentation#location_lookup
+
 ## Demo
 
 You can visit https://weather-app-practical.herokuapp.com/ to see how this app works in production mode.
 
 ## Screenshots
 
+Note: if you want to see old screenshots (before issues fixing), open `images/old` folder (or click [here](images/old))
+
 ![home](images/start.png)
-
-![empty lists](images/empty-lists.png)
-
 ![empty lists](images/loading.png)
-
+![location suggestion](images/start-with-suggestion.png)
 ![empty lists](images/no-results.png)
-
 ![empty lists](images/error-page.png)![details-no-location](images/details.png)
-
 ![details-with-note](images/details-with-note.png)
-
 ![details-note-editing](images/details-note-editing.png)
 
-<img src="images/home-phone.png" alt="home-phone" style="zoom:40%;" />
-
-<img src="images/details-phone.png" alt="home-phone" style="zoom:40%;" />
-
-<img src="images/details-user-location-phone.png" alt="home-phone" style="zoom:40%;" />
+<img src="images/home-phone.png" alt="home-phone" width="250" />
+<img src="images/home-phone-with-suggestion.png" alt="phone with suggestion" width="250" />
+<img src="images/home-phone-2.png" alt="home-phone" width="250" />
+<img src="images/details-phone.png" alt="home-phone" width="250" />
